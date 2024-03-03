@@ -154,9 +154,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _availableObjects:
-  - {fileID: 919132149155446097, guid: a69c1172e0d45734cb2a3169d6ef3100, type: 3}
-  - {fileID: 919132149155446097, guid: eee4292300daf5c44a9206e305bda2e1, type: 3}
-  - {fileID: 919132149155446097, guid: 7584742eba928c042b42edff9fb170ea, type: 3}
+  - {fileID: 65318932501770969, guid: 9781d94d28272a048beb132c52756d16, type: 3}
+  - {fileID: 5241015201965361099, guid: 08929f793f2a14d4da8d8ce28ee60e0a, type: 3}
+  - {fileID: 5504235913898889120, guid: 4e330cc9d0dcd9e4984fb04abcaade8c, type: 3}
+  - {fileID: 4220604739128781328, guid: 3b53565e8ccc07f47a7b19b4776e0c84, type: 3}
+  - {fileID: 5824720372885966740, guid: d3b4fb609b7a0a24dac01a10dab2ab15, type: 3}
+  - {fileID: 375936815358397112, guid: 7c1f9190a7e53194b9e81e57f7ad743b, type: 3}
   _conveyorTime: 2.5
   _animationCurve:
     serializedVersion: 2
@@ -200,11 +203,10 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  _center: {x: 0, y: 0.35, z: 0}
-  _spawnPoint: {x: 4, y: 0.35, z: 0}
-  _despawnPoint: {x: -4, y: 0.35, z: 0}
+  _center: {x: 0, y: 0.36, z: 0}
+  _spawnPoint: {x: 4, y: 0.36, z: 0}
+  _despawnPoint: {x: -4, y: 0.36, z: 0}
   _containerForSpawnedObjects: {fileID: 2160663270269660353}
-  _isMoving: 0
 --- !u!1 &7022141410165941852
 GameObject:
   m_ObjectHideFlags: 0

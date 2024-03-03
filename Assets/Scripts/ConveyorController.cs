@@ -13,7 +13,7 @@ public class ConveyorController : MonoBehaviour
     private Transform[] _objectsOnTheConveyor = new Transform[3];
 
     private float _timer = 0.0f;
-    public bool _isMoving = false;
+    private bool _isMoving = false;
 
     private void Start()
     {
