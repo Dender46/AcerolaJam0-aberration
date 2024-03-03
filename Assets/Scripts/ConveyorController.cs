@@ -13,7 +13,7 @@ public class ConveyorController : MonoBehaviour
     private Transform[] _objectsOnTheConveyor = new Transform[3];
 
     private float _timer = 0.0f;
-    private bool _isMoving = false;
+    public bool _isMoving = false;
 
     private void Start()
     {
@@ -21,6 +21,8 @@ public class ConveyorController : MonoBehaviour
         firstObject.SetParent(_containerForSpawnedObjects, false);
         firstObject.localPosition = _spawnPoint;
         _objectsOnTheConveyor[0] = firstObject;
+
+        _isMoving = true;
     }
 
     private void Update()
@@ -60,12 +62,6 @@ public class ConveyorController : MonoBehaviour
         newObject.SetParent(_containerForSpawnedObjects, false);
         newObject.localPosition = _spawnPoint;
         _objectsOnTheConveyor[0] = newObject;
-    }
-
-    [ContextMenu("__UnPauseConveyor")]
-    public void UnPauseConveyor()
-    {
-        _isMoving = true;
     }
 
     private GameObject GetRandomAvailableObject()
