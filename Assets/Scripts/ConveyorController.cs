@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class ConveyorController : MonoBehaviour
@@ -13,7 +14,7 @@ public class ConveyorController : MonoBehaviour
     private Transform[] _objectsOnTheConveyor = new Transform[3];
 
     private float _timer = 0.0f;
-    public bool _isMoving = false;
+    private bool _isMoving = false;
 
     private void Start()
     {
@@ -41,6 +42,21 @@ public class ConveyorController : MonoBehaviour
             if (_objectsOnTheConveyor[0]) LerpObjectToDest(_objectsOnTheConveyor[0], _spawnPoint, _center, lerpT);
             if (_objectsOnTheConveyor[1]) LerpObjectToDest(_objectsOnTheConveyor[1], _center, _despawnPoint, lerpT);
         }
+    }
+
+    public bool IsMoving()
+    {
+        return _isMoving;
+    }
+
+    public void ResumeConveyor()
+    {
+        _isMoving = true;
+    }
+
+    public GameObject GrabCurrentItem()
+    {
+        return _objectsOnTheConveyor[1].gameObject;
     }
 
     private void LerpObjectToDest(Transform t, Vector3 start, Vector3 dest, float lerpT)

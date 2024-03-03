@@ -165,7 +165,7 @@ MonoBehaviour:
   - {fileID: 3491761762132380921, guid: 8f3769c958402ee42990929bc46e4e30, type: 3}
   - {fileID: 6095962589583833676, guid: 1ad4df3a554a7584483010b7de5854ee, type: 3}
   - {fileID: 3164129923169577154, guid: 5ff429c69f727c74d841e2491897798e, type: 3}
-  _conveyorTime: 2.5
+  _conveyorTime: 2
   _animationCurve:
     serializedVersion: 2
     m_Curve:
