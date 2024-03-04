@@ -3,6 +3,7 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     public ConveyorController conveyorController;
+    public PlayerInventory inventory;
 
     public GameManager instance;
 
@@ -28,8 +29,9 @@ public class GameManager : MonoBehaviour
         if (!conveyorController.IsMoving())
         {
             var grabbedItem = conveyorController.GrabCurrentItem();
-            Destroy(grabbedItem);
             // TODO: move to inventory
+            inventory.Put(grabbedItem.GetComponent<EquipableBehaviour>());
+            Destroy(grabbedItem);
             conveyorController.ResumeConveyor();
         }
     }

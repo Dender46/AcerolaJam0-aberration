@@ -82,7 +82,8 @@ public class ConveyorController : MonoBehaviour
 
     private GameObject GetRandomAvailableObject()
     {
-        return _availableObjects[Random.Range(0, _availableObjects.Length)];
+        //return _availableObjects[Random.Range(0, _availableObjects.Length)];
+        return _availableObjects[0];
     }
 
     private void OnDrawGizmosSelected()
