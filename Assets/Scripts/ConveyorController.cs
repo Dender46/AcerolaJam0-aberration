@@ -1,5 +1,6 @@
-using Unity.VisualScripting;
+using System;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class ConveyorController : MonoBehaviour
 {
@@ -12,9 +13,17 @@ public class ConveyorController : MonoBehaviour
     [SerializeField] private Transform _containerForSpawnedObjects;
 
     private Transform[] _objectsOnTheConveyor = new Transform[3];
+    public int TEMP_SpawnCeil = 3;
 
     private float _timer = 0.0f;
     private bool _isMoving = false;
+
+    public class FinishedMovingEventArgs : EventArgs
+    {
+        public GameObject item;
+    }
+
+    public event EventHandler<FinishedMovingEventArgs> onFinishMoving;
 
     private void Start()
     {
@@ -78,12 +87,17 @@ public class ConveyorController : MonoBehaviour
         newObject.SetParent(_containerForSpawnedObjects, false);
         newObject.localPosition = _spawnPoint;
         _objectsOnTheConveyor[0] = newObject;
+
+        onFinishMoving?.Invoke(this, new FinishedMovingEventArgs(){
+            item = _objectsOnTheConveyor[1].gameObject
+        });
     }
 
     private GameObject GetRandomAvailableObject()
     {
+        return _availableObjects[UnityEngine.Random.Range(0, TEMP_SpawnCeil)];
         //return _availableObjects[Random.Range(0, _availableObjects.Length)];
-        return _availableObjects[0];
+        //return _availableObjects[0];
     }
 
     private void OnDrawGizmosSelected()

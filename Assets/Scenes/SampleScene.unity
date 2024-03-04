@@ -3769,6 +3769,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Conveyor
       objectReference: {fileID: 0}
+    - target: {fileID: 8318521124957137344, guid: acf005f7ef85d374ca71e5f47b588500, type: 3}
+      propertyPath: TEMP_SpawnCeil
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 8521544793507310139, guid: acf005f7ef85d374ca71e5f47b588500, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -3985,9 +3989,21 @@ PrefabInstance:
       value: GameManager
       objectReference: {fileID: 0}
     - target: {fileID: 5474771637980431987, guid: fff19cc3d1293bb40b0ce2550d28f16e, type: 3}
+      propertyPath: _grabBttn
+      value: 
+      objectReference: {fileID: 981861916}
+    - target: {fileID: 5474771637980431987, guid: fff19cc3d1293bb40b0ce2550d28f16e, type: 3}
       propertyPath: inventory
       value: 
       objectReference: {fileID: 1864527984}
+    - target: {fileID: 5474771637980431987, guid: fff19cc3d1293bb40b0ce2550d28f16e, type: 3}
+      propertyPath: _approveBttn
+      value: 
+      objectReference: {fileID: 1954848341}
+    - target: {fileID: 5474771637980431987, guid: fff19cc3d1293bb40b0ce2550d28f16e, type: 3}
+      propertyPath: _declineBttn
+      value: 
+      objectReference: {fileID: 568298923}
     - target: {fileID: 5474771637980431987, guid: fff19cc3d1293bb40b0ce2550d28f16e, type: 3}
       propertyPath: conveyorController
       value: 
