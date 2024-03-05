@@ -154,17 +154,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _availableObjects:
-  - {fileID: 65318932501770969, guid: 9781d94d28272a048beb132c52756d16, type: 3}
-  - {fileID: 7574476631856556267, guid: a4a47346961a31846872ecb81006f9fb, type: 3}
+  - {fileID: 856288098985771318, guid: b9b463af064a5d344a8a2bf1b03c888e, type: 3}
+  - {fileID: 7688702159080449526, guid: 97013903ffaf7b24f91b6fd9ff37bfaa, type: 3}
+  - {fileID: 5388292104318864517, guid: e26c2eaec7e1db84e9fd1257b6e4faeb, type: 3}
   - {fileID: 5241015201965361099, guid: 08929f793f2a14d4da8d8ce28ee60e0a, type: 3}
-  - {fileID: 5504235913898889120, guid: 4e330cc9d0dcd9e4984fb04abcaade8c, type: 3}
   - {fileID: 4220604739128781328, guid: 3b53565e8ccc07f47a7b19b4776e0c84, type: 3}
   - {fileID: 5824720372885966740, guid: d3b4fb609b7a0a24dac01a10dab2ab15, type: 3}
-  - {fileID: 375936815358397112, guid: 7c1f9190a7e53194b9e81e57f7ad743b, type: 3}
+  - {fileID: 119054878361052930, guid: 23486c94db1062e42a58285db2c7f95f, type: 3}
   - {fileID: 2735034582045541368, guid: e8817288db4aeb54b8e7a7a065c4eddd, type: 3}
   - {fileID: 3491761762132380921, guid: 8f3769c958402ee42990929bc46e4e30, type: 3}
   - {fileID: 6095962589583833676, guid: 1ad4df3a554a7584483010b7de5854ee, type: 3}
   - {fileID: 3164129923169577154, guid: 5ff429c69f727c74d841e2491897798e, type: 3}
+  _availableEnemies: []
   _conveyorTime: 2
   _animationCurve:
     serializedVersion: 2
@@ -212,6 +213,7 @@ MonoBehaviour:
   _spawnPoint: {x: 4, y: 0.36, z: 0}
   _despawnPoint: {x: -4, y: 0.36, z: 0}
   _containerForSpawnedObjects: {fileID: 2160663270269660353}
+  TEMP_SpawnCeil: 3
 --- !u!1 &7022141410165941852
 GameObject:
   m_ObjectHideFlags: 0

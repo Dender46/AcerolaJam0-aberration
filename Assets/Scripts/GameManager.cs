@@ -22,7 +22,7 @@ public class GameManager : MonoBehaviour
 
     private GameState _gameState = GameState.WaitingForConveyor;
 
-    public GameManager instance;
+    public GameManager instance { private set; get; }
 
     private void Awake()
     {
@@ -92,27 +92,27 @@ public class GameManager : MonoBehaviour
             case GameState.WaitingForConveyor:
                 _approveBttn.SetActive(false);
                 _declineBttn.SetActive(false);
-                _grabBttn.SetActive(   false);
+                _grabBttn   .SetActive(false);
                 break;
             case GameState.ItemIsRegular:
                 _approveBttn.SetActive(true);
                 _declineBttn.SetActive(true);
-                _grabBttn.SetActive(   false);
+                _grabBttn   .SetActive(false);
                 break;
             case GameState.ItemIsGrabbable:
                 _approveBttn.SetActive(true);
                 _declineBttn.SetActive(true);
-                _grabBttn.SetActive(   true);
+                _grabBttn   .SetActive(true);
                 break; 
             case GameState.ItemIsEnemy:
                 _approveBttn.SetActive(false);
                 _declineBttn.SetActive(true);
-                _grabBttn.SetActive(   false);
+                _grabBttn   .SetActive(false);
                 break; 
             case GameState.FightingEnemy: 
                 _approveBttn.SetActive(false);
                 _declineBttn.SetActive(false);
-                _grabBttn.SetActive(   false);
+                _grabBttn   .SetActive(false);
                 break;
             default:
                 throw new UnityException("Unknonw GameState");

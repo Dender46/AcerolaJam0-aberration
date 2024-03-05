@@ -1,10 +1,10 @@
 using System;
 using UnityEngine;
-using UnityEngine.Events;
 
 public class ConveyorController : MonoBehaviour
 {
     [SerializeField] private GameObject[] _availableObjects;
+    [SerializeField] private GameObject[] _availableEnemies;
     [SerializeField] private float _conveyorTime = 5.0f;
     [SerializeField] private AnimationCurve _animationCurve;
     [SerializeField] private Vector3 _center;

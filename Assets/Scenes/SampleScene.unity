@@ -1111,63 +1111,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 568298923}
   m_CullTransparentMesh: 1
---- !u!1001 &572369708
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 2519092091024983814, guid: b934a4475e2233b48a3034aecd9a618a, type: 3}
-      propertyPath: m_Name
-      value: CircleShadow
-      objectReference: {fileID: 0}
-    - target: {fileID: 4360119882537318771, guid: b934a4475e2233b48a3034aecd9a618a, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 3.7944422
-      objectReference: {fileID: 0}
-    - target: {fileID: 4360119882537318771, guid: b934a4475e2233b48a3034aecd9a618a, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 1.02
-      objectReference: {fileID: 0}
-    - target: {fileID: 4360119882537318771, guid: b934a4475e2233b48a3034aecd9a618a, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -4.0027404
-      objectReference: {fileID: 0}
-    - target: {fileID: 4360119882537318771, guid: b934a4475e2233b48a3034aecd9a618a, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0.7071068
-      objectReference: {fileID: 0}
-    - target: {fileID: 4360119882537318771, guid: b934a4475e2233b48a3034aecd9a618a, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0.7071068
-      objectReference: {fileID: 0}
-    - target: {fileID: 4360119882537318771, guid: b934a4475e2233b48a3034aecd9a618a, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4360119882537318771, guid: b934a4475e2233b48a3034aecd9a618a, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4360119882537318771, guid: b934a4475e2233b48a3034aecd9a618a, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 90
-      objectReference: {fileID: 0}
-    - target: {fileID: 4360119882537318771, guid: b934a4475e2233b48a3034aecd9a618a, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4360119882537318771, guid: b934a4475e2233b48a3034aecd9a618a, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: b934a4475e2233b48a3034aecd9a618a, type: 3}
 --- !u!1 &573293930
 GameObject:
   m_ObjectHideFlags: 0
@@ -1395,7 +1338,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!65 &709696034
 BoxCollider:
@@ -2375,7 +2318,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!136 &1093070240
 CapsuleCollider:
@@ -3769,10 +3712,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Conveyor
       objectReference: {fileID: 0}
-    - target: {fileID: 8318521124957137344, guid: acf005f7ef85d374ca71e5f47b588500, type: 3}
-      propertyPath: TEMP_SpawnCeil
-      value: 3
-      objectReference: {fileID: 0}
     - target: {fileID: 8521544793507310139, guid: acf005f7ef85d374ca71e5f47b588500, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -3873,6 +3812,10 @@ PrefabInstance:
     - target: {fileID: 8682009688210813779, guid: 817cb69c87b025043b366796675e4398, type: 3}
       propertyPath: m_Name
       value: InventorySystem
+      objectReference: {fileID: 0}
+    - target: {fileID: 8682009688210813779, guid: 817cb69c87b025043b366796675e4398, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -3988,6 +3931,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: GameManager
       objectReference: {fileID: 0}
+    - target: {fileID: 4955150595518510164, guid: fff19cc3d1293bb40b0ce2550d28f16e, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 5474771637980431987, guid: fff19cc3d1293bb40b0ce2550d28f16e, type: 3}
       propertyPath: _grabBttn
       value: 
@@ -4076,6 +4023,5 @@ SceneRoots:
   - {fileID: 1023679166}
   - {fileID: 558766649}
   - {fileID: 3350068724885847192}
-  - {fileID: 572369708}
   - {fileID: 7315934944883860359}
   - {fileID: 4867575550376745775}
