@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-public class EquipableBehaviour : MonoBehaviour
+public class ItemEquipable : MonoBehaviour
 {
     [Serializable]
     public class EquipableStats

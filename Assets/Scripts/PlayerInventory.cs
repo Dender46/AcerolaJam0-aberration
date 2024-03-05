@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 using UnityEngine.UI;
-using static EquipableBehaviour;
+using static ItemEquipable;
 
 public class PlayerInventory : MonoBehaviour
 {
@@ -29,7 +29,7 @@ public class PlayerInventory : MonoBehaviour
         }
     }
 
-    public void Put(EquipableBehaviour item)
+    public void Put(ItemEquipable item)
     {
         _slots[_slotsCount].stats = item.itemStats;
         _slots[_slotsCount].iconImage.sprite = item.itemPreview;
