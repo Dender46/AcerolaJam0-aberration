@@ -94,6 +94,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8417024687436776110}
   - component: {fileID: 2315837630088316976}
+  - component: {fileID: -5617191639879793920}
   m_Layer: 0
   m_Name: TurkeyEnemy
   m_TagString: Untagged
@@ -128,6 +129,22 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 19d6e6c85cce51c49aa9a67382944b8d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemyName: Silly Turkey
+  maxHp: 8
+  hp: 0
+  damage: 1
+--- !u!114 &-5617191639879793920
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1258627779827714416}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5827a2ca3f6a856469aa35a79f5f0eda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _animationCurve:

@@ -24,7 +24,7 @@ public class GameManager : MonoBehaviour
     private int _enemyItemLayer;
     private GameState _gameState = GameState.WaitingForConveyor;
 
-    public GameManager instance { private set; get; }
+    public static GameManager instance { private set; get; }
 
     private void Awake()
     {
@@ -105,7 +105,8 @@ public class GameManager : MonoBehaviour
             var spawnedEnemy = Instantiate(grabbedItem.GetComponent<ItemEnemy>().enemyPrefab);
             spawnedEnemy.transform.position = grabbedItem.transform.position;
             Destroy(grabbedItem);
-            //FightManager.instance.StartTheFight();
+
+            CombatSystem.instance.StartTheFight(spawnedEnemy);
         }
     }
 
