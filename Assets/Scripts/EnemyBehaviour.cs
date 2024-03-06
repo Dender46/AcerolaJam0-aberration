@@ -9,7 +9,7 @@ public class EnemyBehaviour : MonoBehaviour
     public int hp;
     public int damage = 2;
 
-    private void Start()
+    private void Awake()
     {
         hp = maxHp;
         if (enemyName.Length == 0)

@@ -15,7 +15,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 5721338939258241955, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &4735825607885074231
 Transform:
@@ -44,3 +44,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 20268526b264f414aa0f0c936b1fcc98, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _slotsContainer: {fileID: 0}
+  _combatCardsContainer: {fileID: 0}
+  _combatCardPrefab: {fileID: 2192157514610475991, guid: f9019bd4403f34d479ab28613a541956, type: 3}

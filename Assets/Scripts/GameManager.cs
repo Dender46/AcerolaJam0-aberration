@@ -89,7 +89,7 @@ public class GameManager : MonoBehaviour
             _gameState = GameState.WaitingForConveyor;
             var grabbedItem = conveyorController.GrabCurrentItem();
             // TODO: move to inventory
-            inventory.Put(grabbedItem.GetComponent<ItemEquipable>());
+            inventory.Put(grabbedItem.GetComponent<ItemEquipable>().info);
             Destroy(grabbedItem);
             conveyorController.ResumeConveyor();
             UpdateUI();
@@ -133,7 +133,7 @@ public class GameManager : MonoBehaviour
                 _fightBttn  .SetActive(false);
                 break; 
             case GameState.ItemIsEnemy:
-                _approveBttn.SetActive(false);
+                _approveBttn.SetActive(true);
                 _declineBttn.SetActive(false);
                 _grabBttn   .SetActive(false);
                 _fightBttn  .SetActive(true);

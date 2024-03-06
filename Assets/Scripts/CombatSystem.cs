@@ -1,10 +1,13 @@
 using TMPro;
 using UnityEngine;
+using static ItemEquipable;
 
 public class CombatSystem : MonoBehaviour
 {
     [SerializeField] private TMP_Text _enemyNameTextUI;
     [SerializeField] private TMP_Text _enemyHpTextUI;
+
+    private EnemyBehaviour _currentEnemy;
 
     public static CombatSystem instance { private set; get; }
 
@@ -21,10 +24,9 @@ public class CombatSystem : MonoBehaviour
         _enemyNameTextUI.gameObject.SetActive(true);
         _enemyHpTextUI.gameObject.SetActive(true);
 
-        var enemyBeh = enemyGO.GetComponent<EnemyBehaviour>();
-        _enemyNameTextUI.text = enemyBeh.enemyName;
-        _enemyHpTextUI.text = "HP: " + enemyBeh.maxHp;
-        //GameManager.instance.inventory.TurnItemsToCards();
+        _currentEnemy = enemyGO.GetComponent<EnemyBehaviour>();
+        UpdateUI();
+        GameManager.instance.inventory.TurnItemsToCards();
     }
 
     public void EndTheFight()
@@ -33,9 +35,16 @@ public class CombatSystem : MonoBehaviour
         _enemyHpTextUI.gameObject.SetActive(false);
     }
 
-    // Update is called once per frame
-    void Update()
+    public void PlayerAttacksWith(EquipableInfo equipableInfo)
     {
-        
+        _currentEnemy.hp -= equipableInfo.damage;
+
+        UpdateUI();
+    }
+
+    private void UpdateUI()
+    {
+        _enemyNameTextUI.text = _currentEnemy.enemyName;
+        _enemyHpTextUI.text = "HP: " + _currentEnemy.hp;
     }
 }

@@ -101,7 +101,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 364c5fc27449f7a48a006f7366db5367, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemStats:
+  info:
+    name: 
+    preview: {fileID: 0}
     type: 2
     damage: 10
     defence: 2

@@ -4,7 +4,7 @@ using UnityEngine;
 public class ItemEquipable : MonoBehaviour
 {
     [Serializable]
-    public class EquipableStats
+    public class EquipableInfo
     {
         public enum Type
         {
@@ -14,6 +14,9 @@ public class ItemEquipable : MonoBehaviour
             Defence,
         }
 
+        [HideInInspector] public string name;
+        [HideInInspector] public Sprite preview;
+
         public Type type;
         public int damage = 10;
         public int defence = 2;
@@ -22,12 +25,14 @@ public class ItemEquipable : MonoBehaviour
         public int haveUses = 2;
     }
 
-    public EquipableStats itemStats;
+    public EquipableInfo info;
     public Sprite itemPreview;
 
     private void OnEnable()
     {
-        if (itemStats != null && itemStats.type == EquipableStats.Type.None)
+        info.name = gameObject.name;
+        info.preview = itemPreview;
+        if (info != null && info.type == EquipableInfo.Type.None)
         {
             throw new UnityException("EquipableStats.Type.None of " + gameObject.name);
         }
