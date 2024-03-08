@@ -4400,10 +4400,6 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1491046320}
     - target: {fileID: 1828185159943354468, guid: 817cb69c87b025043b366796675e4398, type: 3}
-      propertyPath: _combatCardPrefab
-      value: 
-      objectReference: {fileID: 2192157514610475991, guid: f9019bd4403f34d479ab28613a541956, type: 3}
-    - target: {fileID: 1828185159943354468, guid: 817cb69c87b025043b366796675e4398, type: 3}
       propertyPath: _combatCardsContainer
       value: 
       objectReference: {fileID: 1214889682}
@@ -4450,10 +4446,6 @@ PrefabInstance:
     - target: {fileID: 8682009688210813779, guid: 817cb69c87b025043b366796675e4398, type: 3}
       propertyPath: m_Name
       value: InventorySystem
-      objectReference: {fileID: 0}
-    - target: {fileID: 8682009688210813779, guid: 817cb69c87b025043b366796675e4398, type: 3}
-      propertyPath: m_StaticEditorFlags
-      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
