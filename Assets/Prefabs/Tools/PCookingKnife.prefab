@@ -10,7 +10,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 5574089062023156028, guid: cbf58e0749ed40e43a80b4ca5ef7609d, type: 3}
       propertyPath: m_Name
-      value: PCookingKnife Variant
+      value: PCookingKnife
       objectReference: {fileID: 0}
     - target: {fileID: 5574089062023156028, guid: cbf58e0749ed40e43a80b4ca5ef7609d, type: 3}
       propertyPath: m_Layer
@@ -102,12 +102,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   info:
-    name: 
+    name: Cooking Knife
     preview: {fileID: 0}
     type: 2
     damage: 10
     defence: 2
-    restoreHp: 2
+    restoreHp: 0
     haveUses: 2
   itemPreview: {fileID: 21300000, guid: 3f069ca07a44f4441a98b6302f3fa62e, type: 3}
 --- !u!4 &7218908446476984427 stripped

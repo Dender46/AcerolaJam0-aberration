@@ -1,7 +1,5 @@
 using System;
-using System.Text;
 using UnityEngine;
-using UnityEngine.UIElements;
 
 public class ItemEquipable : MonoBehaviour
 {
@@ -16,8 +14,8 @@ public class ItemEquipable : MonoBehaviour
             Defence,
         }
 
-        [HideInInspector] public string name;
-        [HideInInspector] public Sprite preview;
+        public string name;
+        [HideInInspector] public Sprite preview; // asigned from this component OnEnable()
 
         public Type type;
         public int damage = 10;
@@ -32,7 +30,6 @@ public class ItemEquipable : MonoBehaviour
 
     private void OnEnable()
     {
-        info.name = gameObject.name.Substring(1, gameObject.name.Length - gameObject.name.LastIndexOf("(Clone)"));
         info.preview = itemPreview;
         if (info != null && info.type == EquipableInfo.Type.None)
         {

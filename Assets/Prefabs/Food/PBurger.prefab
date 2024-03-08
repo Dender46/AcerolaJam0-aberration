@@ -103,7 +103,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   info:
-    name: 
+    name: Burger
     preview: {fileID: 0}
     type: 1
     damage: 10

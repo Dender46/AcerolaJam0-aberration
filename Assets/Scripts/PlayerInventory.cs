@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using static ItemEquipable;
@@ -8,11 +9,13 @@ public class PlayerInventory : MonoBehaviour
     [SerializeField] private Transform _slotsContainer;
     [SerializeField] private Transform _combatCardsContainer;
     [SerializeField] private GameObject _combatCardPrefab;
+    [Header("Debug")]
+    [SerializeField] private GameObject __debugEquipmentHeal;
+    [SerializeField] private GameObject __debugEquipmentDamage;
 
     [Serializable]
-    struct SlotInfo
+    class SlotInfo
     {
-        public Transform t;
         public Image iconImage;
 
         public EquipableInfo equipmentInfo;
@@ -21,10 +24,12 @@ public class PlayerInventory : MonoBehaviour
     private SlotInfo[] _slots;
     private int _slotsCount = 0;
 
+    private List<CombatCardController> _combatCards = new();
     private RectTransform _containerRect;
     private float _containerWidth;
 
-    public float additionalOffset = 0.0f;
+    private readonly Color WHITE_ALPHA_1 = new(1.0f, 1.0f, 1.0f, 1.0f);
+    private readonly Color WHITE_ALPHA_0 = new(0.0f, 0.0f, 0.0f, 0.0f);
 
     void Awake()
     {
@@ -35,7 +40,9 @@ public class PlayerInventory : MonoBehaviour
         for (int i = 0; i < _slotsContainer.childCount; i++)
         {
             var slotT = _slotsContainer.GetChild(i);
-            _slots[i].iconImage = slotT.GetChild(0).GetComponent<Image>();
+            _slots[i] = new SlotInfo() {
+                iconImage = slotT.GetChild(0).GetComponent<Image>()
+            };
         }
     }
 
@@ -43,12 +50,13 @@ public class PlayerInventory : MonoBehaviour
     {
         _slots[_slotsCount].equipmentInfo = info;
         _slots[_slotsCount].iconImage.sprite = info.preview;
-        _slots[_slotsCount].iconImage.color = Color.white;
+        _slots[_slotsCount].iconImage.color = WHITE_ALPHA_1;
         _slotsCount++;
     }
 
     public void TurnItemsToCards()
     {
+        _combatCards.Clear();
         foreach (var inventorySlot in _slots)
         {
             if (inventorySlot.equipmentInfo == null)
@@ -60,10 +68,29 @@ public class PlayerInventory : MonoBehaviour
             newCardTransform.parent = _combatCardsContainer;
             newCardTransform.anchoredPosition = Vector2.zero;
             newCardTransform.localScale = Vector3.one;
-            newCardTransform.GetComponent<CombatCardController>().AssignItem(inventorySlot.equipmentInfo);
-        }
+            var combatController = newCardTransform.GetComponent<CombatCardController>();
+            combatController.AssignItem(inventorySlot.equipmentInfo);
+            _combatCards.Add(combatController);
 
+            // Clear items from inventory
+            inventorySlot.equipmentInfo = null;
+            inventorySlot.iconImage.sprite = null;
+            inventorySlot.iconImage.color = WHITE_ALPHA_0;
+        }
         RecalcCardsContainerSpacing();
+    }
+
+    public void TurnCardsToItems()
+    {
+        _slotsCount = 0;
+        foreach (var combatCard in _combatCards)
+        {
+            if (combatCard && !combatCard.wasUsed)
+            {
+                Put(combatCard.assignedEquipment);
+                Destroy(combatCard.gameObject);
+            }
+        }
     }
 
     [ContextMenu("__RecalcCardsContainerSpacing")]
@@ -114,5 +141,19 @@ public class PlayerInventory : MonoBehaviour
                 childRect.anchoredPosition = new Vector2(pos.x - offset, 0);
             }
         }
+    }
+
+    [ContextMenu("__DebugPutHeal")]
+    public void __DebugPutHeal()
+    {
+        __debugEquipmentHeal.GetComponent<ItemEquipable>().info.preview = __debugEquipmentHeal.GetComponent<ItemEquipable>().itemPreview;
+        Put(__debugEquipmentHeal.GetComponent<ItemEquipable>().info);
+    }
+
+    [ContextMenu("__DebugPutDamage")]
+    public void __DebugPutDamage()
+    {
+        __debugEquipmentDamage.GetComponent<ItemEquipable>().info.preview = __debugEquipmentDamage.GetComponent<ItemEquipable>().itemPreview;
+        Put(__debugEquipmentDamage.GetComponent<ItemEquipable>().info);
     }
 }

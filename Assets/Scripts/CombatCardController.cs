@@ -9,18 +9,9 @@ public class CombatCardController : MonoBehaviour, IPointerClickHandler
     [SerializeField] private TMP_Text _itemName;
     [SerializeField] private Image _itemPreview;
 
+    [HideInInspector] public bool wasUsed = false;
+
     public EquipableInfo assignedEquipment;
-
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 
     public void AssignItem(EquipableInfo equipableInfo)
     {
@@ -31,7 +22,8 @@ public class CombatCardController : MonoBehaviour, IPointerClickHandler
 
     public void OnPointerClick(PointerEventData pointerEventData)
     {
-        CombatSystem.instance.PlayerAttacksWith(assignedEquipment);
+        wasUsed = true;
         Destroy(gameObject);
+        CombatSystem.instance.PlayerAttacksWith(assignedEquipment);
     }
 }

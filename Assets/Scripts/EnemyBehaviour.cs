@@ -6,7 +6,7 @@ public class EnemyBehaviour : MonoBehaviour
 
     [Header("Stats")]
     public int maxHp = 10;
-    public int hp;
+    [HideInInspector] public int hp;
     public int damage = 2;
 
     private void Awake()
@@ -18,9 +18,8 @@ public class EnemyBehaviour : MonoBehaviour
         }
     }
 
-    private void Update()
+    public void OnDefeated()
     {
-
+        Destroy(gameObject);
     }
-
 }

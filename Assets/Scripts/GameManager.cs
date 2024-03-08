@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
@@ -36,6 +37,7 @@ public class GameManager : MonoBehaviour
     {
         UpdateUI();
         conveyorController.onFinishMoving += OnConveyorFinished;
+        CombatSystem.instance.onEnemyDefeated += OnEnemyKilled;
     }
 
     private void Update()
@@ -57,9 +59,11 @@ public class GameManager : MonoBehaviour
         UpdateUI();
     }
 
-    private void OnEnemyKilled()
+    private void OnEnemyKilled(object sender, EventArgs args)
     {
-
+        _gameState = GameState.WaitingForConveyor;
+        conveyorController.ResumeConveyor();
+        UpdateUI();
     }
 
     public void UI_ApproveCurrentItem()
@@ -88,7 +92,6 @@ public class GameManager : MonoBehaviour
         {
             _gameState = GameState.WaitingForConveyor;
             var grabbedItem = conveyorController.GrabCurrentItem();
-            // TODO: move to inventory
             inventory.Put(grabbedItem.GetComponent<ItemEquipable>().info);
             Destroy(grabbedItem);
             conveyorController.ResumeConveyor();
@@ -107,6 +110,7 @@ public class GameManager : MonoBehaviour
             Destroy(grabbedItem);
 
             CombatSystem.instance.StartTheFight(spawnedEnemy);
+            UpdateUI();
         }
     }
 
