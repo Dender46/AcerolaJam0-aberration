@@ -21,8 +21,16 @@ public class PlayerInventory : MonoBehaviour
     private SlotInfo[] _slots;
     private int _slotsCount = 0;
 
+    private RectTransform _containerRect;
+    private float _containerWidth;
+
+    public float additionalOffset = 0.0f;
+
     void Awake()
     {
+        _containerRect = _combatCardsContainer.GetComponent<RectTransform>();
+        _containerWidth = _containerRect.sizeDelta.x;
+
         _slots = new SlotInfo[_slotsContainer.childCount];
         for (int i = 0; i < _slotsContainer.childCount; i++)
         {
@@ -41,8 +49,6 @@ public class PlayerInventory : MonoBehaviour
 
     public void TurnItemsToCards()
     {
-
-
         foreach (var inventorySlot in _slots)
         {
             if (inventorySlot.equipmentInfo == null)
@@ -55,6 +61,58 @@ public class PlayerInventory : MonoBehaviour
             newCardTransform.anchoredPosition = Vector2.zero;
             newCardTransform.localScale = Vector3.one;
             newCardTransform.GetComponent<CombatCardController>().AssignItem(inventorySlot.equipmentInfo);
+        }
+
+        RecalcCardsContainerSpacing();
+    }
+
+    [ContextMenu("__RecalcCardsContainerSpacing")]
+    public void RecalcCardsContainerSpacing()
+    {
+        if (_containerRect.childCount == 0)
+        {
+            return;
+        }
+
+        var cardSize = 80;
+        var cardSizeHalf = cardSize / 2;
+        var childCount = _containerRect.childCount;
+        var extraSpaceTaken = (childCount * cardSize) - _containerWidth;
+
+        if (extraSpaceTaken > 0.0f)
+        {
+            float containerBounds = _containerWidth / 2 - cardSizeHalf;
+            for (int i = 0; i < childCount; i++)
+            {
+                var lerpt = (float)i / (childCount-1);
+                var newPos = Mathf.Lerp(-containerBounds, containerBounds, lerpt);
+
+                var childRect = _containerRect.GetChild(i).GetComponent<RectTransform>();
+                childRect.anchoredPosition = new Vector2(newPos, 0);
+            }
+        }
+        else
+        {
+            if (childCount == 1)
+            {
+                _containerRect.GetChild(0).GetComponent<RectTransform>().anchoredPosition = Vector2.zero;
+                return;
+            }
+
+            for (int i = 0; i < childCount; i++)
+            {
+                _containerRect.GetChild(i).GetComponent<RectTransform>().anchoredPosition = new Vector2(i * cardSize, 0);
+            }
+            float offset = childCount % 2 == 0
+                ? Mathf.Floor(childCount / 2) * cardSize - cardSizeHalf
+                : Mathf.Floor(childCount / 2) * cardSize;
+
+            for (int i = 0; i < childCount; i++)
+            {
+                var childRect = _containerRect.GetChild(i).GetComponent<RectTransform>();
+                var pos = childRect.anchoredPosition;
+                childRect.anchoredPosition = new Vector2(pos.x - offset, 0);
+            }
         }
     }
 }
