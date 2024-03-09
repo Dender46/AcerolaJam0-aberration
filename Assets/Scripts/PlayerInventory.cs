@@ -21,6 +21,12 @@ public class PlayerInventory : MonoBehaviour
         public EquipableInfo equipmentInfo;
     }
 
+    class CombatSlotInfo
+    {
+        public CombatCardController cardController;
+        public RectTransform rectTransform;
+    }
+
     private SlotInfo[] _slots;
     private int _slotsCount = 0;
 
@@ -65,7 +71,7 @@ public class PlayerInventory : MonoBehaviour
             }
 
             var newCardTransform = Instantiate(_combatCardPrefab).GetComponent<RectTransform>();
-            newCardTransform.parent = _combatCardsContainer;
+            newCardTransform.SetParent(_combatCardsContainer, false);
             newCardTransform.anchoredPosition = Vector2.zero;
             newCardTransform.localScale = Vector3.one;
             var combatController = newCardTransform.GetComponent<CombatCardController>();
@@ -91,6 +97,13 @@ public class PlayerInventory : MonoBehaviour
                 Destroy(combatCard.gameObject);
             }
         }
+    }
+
+    public void OnCardClick(CombatCardController card)
+    {
+        Destroy(card.gameObject);
+        // TODO FIX THIS
+        //RecalcCardsContainerSpacing();
     }
 
     [ContextMenu("__RecalcCardsContainerSpacing")]

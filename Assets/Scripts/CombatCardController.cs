@@ -22,8 +22,11 @@ public class CombatCardController : MonoBehaviour, IPointerClickHandler
 
     public void OnPointerClick(PointerEventData pointerEventData)
     {
-        wasUsed = true;
-        Destroy(gameObject);
-        CombatSystem.instance.PlayerAttacksWith(assignedEquipment);
+        if (CombatSystem.instance.isPlayerTurn)
+        {
+            wasUsed = true;
+            GameManager.instance.inventory.OnCardClick(this);
+            CombatSystem.instance.PlayerMove(assignedEquipment);
+        }
     }
 }

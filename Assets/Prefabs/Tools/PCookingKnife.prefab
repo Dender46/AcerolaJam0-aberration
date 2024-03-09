@@ -103,9 +103,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   info:
     name: Cooking Knife
-    preview: {fileID: 0}
+    preview: {fileID: 21300000, guid: 3f069ca07a44f4441a98b6302f3fa62e, type: 3}
     type: 2
-    damage: 10
+    damage: 5
     defence: 2
     restoreHp: 0
     haveUses: 2

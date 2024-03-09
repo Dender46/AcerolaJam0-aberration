@@ -6,12 +6,13 @@ public class ItemEquipable : MonoBehaviour
     [Serializable]
     public class EquipableInfo
     {
+        [Flags]
         public enum Type
         {
-            None,
-            Heal,
-            Damage,
-            Defence,
+            None    = 0,
+            Heal    = 1,
+            Damage  = 1 << 1,
+            Defence = 1 << 2,
         }
 
         public string name;
@@ -22,6 +23,7 @@ public class ItemEquipable : MonoBehaviour
         public int defence = 2;
 
         public int restoreHp = 2;
+        public int restoreDp = 2;
         public int haveUses = 2;
     }
 

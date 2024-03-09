@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using TMPro;
 using UnityEngine;
 using static ItemEquipable;
@@ -13,9 +14,15 @@ public class CombatSystem : MonoBehaviour
     [Space(7)]
     [SerializeField] private GameObject _inventoryUI;
     [SerializeField] private GameObject _playerCombatStatsUI;
+    [Header("PlayerStats")]
+    public int playerHP = 10;
+    public int playerDP = 0;
+    [Header("CombatParams")]
+    public float attackWaitTime = 1.0f;
 
     private EnemyBehaviour _currentEnemy;
-
+    public bool isPlayerTurn = true;
+    
     public event EventHandler onEnemyDefeated;
 
     public static CombatSystem instance { private set; get; }
@@ -30,32 +37,83 @@ public class CombatSystem : MonoBehaviour
     {
         _currentEnemy = enemyGO.GetComponent<EnemyBehaviour>();
         EnableUI();
-        UpdateEnemyUI();
+        UpdatePlayerAndEnemyUI();
         GameManager.instance.inventory.TurnItemsToCards();
+        isPlayerTurn = true;
     }
 
-    public void EndTheFight()
+    public void EndTheFight(bool isWin)
     {
-        _currentEnemy.OnDefeated();
-        DisableUI();
-        GameManager.instance.inventory.TurnCardsToItems();
+        if (isWin)
+        {
+            _currentEnemy.OnDefeated();
+            DisableUI();
+            GameManager.instance.inventory.TurnCardsToItems();
 
-        onEnemyDefeated?.Invoke(this, EventArgs.Empty);
+            onEnemyDefeated?.Invoke(this, EventArgs.Empty);
+        }
     }
 
-    public void PlayerAttacksWith(EquipableInfo equipableInfo)
+    public void PlayerMove(EquipableInfo equipableInfo)
     {
-        PlayerAttacksWith(equipableInfo.damage);
+        if (equipableInfo.type.HasFlag(EquipableInfo.Type.Heal)) {
+            playerHP += equipableInfo.restoreHp;
+        }
+        if (equipableInfo.type.HasFlag(EquipableInfo.Type.Defence)) {
+            playerHP += equipableInfo.restoreDp;
+        }
+        if (equipableInfo.type.HasFlag(EquipableInfo.Type.Damage)) {
+            PlayerAttacksWith(equipableInfo.damage);
+        }
+
+        isPlayerTurn = false;
+        UpdatePlayerAndEnemyUI();
+        StartCoroutine(PlayerMoveInternal(equipableInfo));
+    }
+
+    private IEnumerator PlayerMoveInternal(EquipableInfo equipableInfo)
+    {
+        yield return new WaitForSeconds(attackWaitTime);
+
+        // if enemy was killed or player lost
+        if (GameManager.instance.gameState == GameManager.GameState.FightingEnemy)
+        {
+            Debug.Log("EnemyAttacks");
+            EnemyAttacks(_currentEnemy.damage);
+            yield return new WaitForSeconds(attackWaitTime);
+            Debug.Log("Player can attack");
+            isPlayerTurn = true;
+        }
+    }
+
+    public void EnemyAttacks(int dmg)
+    {
+        if (playerDP >= dmg)
+        {
+            playerDP -= dmg;
+        }
+        else
+        {
+            var dmgAfterDP = dmg - playerDP;
+            playerDP = 0;
+            playerHP -= dmgAfterDP;
+        }
+
+        if (playerHP <= 0)
+        {
+            EndTheFight(false);
+        }
+        UpdatePlayerAndEnemyUI();
     }
 
     public void PlayerAttacksWith(int dmg)
     {
         _currentEnemy.hp -= dmg;
-        if (_currentEnemy.hp <= 0.0f)
+        if (_currentEnemy.hp <= 0)
         {
-            EndTheFight();
+            EndTheFight(true);
         }
-        UpdateEnemyUI();
+        UpdatePlayerAndEnemyUI();
     }
 
     private void EnableUI()
@@ -76,10 +134,13 @@ public class CombatSystem : MonoBehaviour
         _inventoryUI               .SetActive(true);
     }
 
-    private void UpdateEnemyUI()
+    private void UpdatePlayerAndEnemyUI()
     {
         _enemyNameTextUI.text = _currentEnemy.enemyName;
         _enemyHPTextUI.text = "HP: " + _currentEnemy.hp;
+
+        _playerHPTextUI.text = playerHP.ToString();
+        _playerDPTextUI.text = playerDP.ToString();
     }
 
     [ContextMenu("__DebugAttackEnemy1")]

@@ -5203,6 +5203,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 766383218}
     - target: {fileID: 6830145792236437575, guid: 7d3cac1d6788ee34baffd827e9bd167c, type: 3}
+      propertyPath: attackWaitTime
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6830145792236437575, guid: 7d3cac1d6788ee34baffd827e9bd167c, type: 3}
       propertyPath: _playerDPTextUI
       value: 
       objectReference: {fileID: 1751853061}

@@ -6,7 +6,7 @@ public class EnemyBehaviour : MonoBehaviour
 
     [Header("Stats")]
     public int maxHp = 10;
-    [HideInInspector] public int hp;
+    public int hp;
     public int damage = 2;
 
     private void Awake()

@@ -13,7 +13,7 @@ public class GameManager : MonoBehaviour
 
     public bool inputIsBlocked { private set; get; }
 
-    private enum GameState
+    public enum GameState
     {
         WaitingForConveyor,
         ItemIsRegular,
@@ -24,6 +24,7 @@ public class GameManager : MonoBehaviour
 
     private int _enemyItemLayer;
     private GameState _gameState = GameState.WaitingForConveyor;
+    public GameState gameState => _gameState;
 
     public static GameManager instance { private set; get; }
 
