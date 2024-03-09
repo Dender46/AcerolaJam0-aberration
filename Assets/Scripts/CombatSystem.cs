@@ -38,7 +38,7 @@ public class CombatSystem : MonoBehaviour
         _currentEnemy = enemyGO.GetComponent<EnemyBehaviour>();
         EnableUI();
         UpdatePlayerAndEnemyUI();
-        GameManager.instance.inventory.TurnItemsToCards();
+        PlayerInventory.instance.TurnItemsToCards();
         isPlayerTurn = true;
     }
 
@@ -48,7 +48,7 @@ public class CombatSystem : MonoBehaviour
         {
             _currentEnemy.OnDefeated();
             DisableUI();
-            GameManager.instance.inventory.TurnCardsToItems();
+            PlayerInventory.instance.TurnCardsToItems();
 
             onEnemyDefeated?.Invoke(this, EventArgs.Empty);
         }

@@ -9,7 +9,6 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject _fightBttn;
 
     public ConveyorController conveyorController;
-    public PlayerInventory inventory;
 
     public bool inputIsBlocked { private set; get; }
 
@@ -93,7 +92,7 @@ public class GameManager : MonoBehaviour
         {
             _gameState = GameState.WaitingForConveyor;
             var grabbedItem = conveyorController.GrabCurrentItem();
-            inventory.Put(grabbedItem.GetComponent<ItemEquipable>().info);
+            PlayerInventory.instance.Put(grabbedItem.GetComponent<ItemEquipable>().info);
             Destroy(grabbedItem);
             conveyorController.ResumeConveyor();
             UpdateUI();

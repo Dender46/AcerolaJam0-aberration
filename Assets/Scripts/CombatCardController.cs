@@ -25,7 +25,7 @@ public class CombatCardController : MonoBehaviour, IPointerClickHandler
         if (CombatSystem.instance.isPlayerTurn)
         {
             wasUsed = true;
-            GameManager.instance.inventory.OnCardClick(this);
+            PlayerInventory.instance.OnCardClick(this);
             CombatSystem.instance.PlayerMove(assignedEquipment);
         }
     }

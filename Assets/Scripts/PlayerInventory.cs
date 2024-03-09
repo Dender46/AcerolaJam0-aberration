@@ -30,12 +30,14 @@ public class PlayerInventory : MonoBehaviour
     private SlotInfo[] _slots;
     private int _slotsCount = 0;
 
-    private List<CombatCardController> _combatCards = new();
+    private List<CombatSlotInfo> _combatCards = new();
     private RectTransform _containerRect;
     private float _containerWidth;
 
     private readonly Color WHITE_ALPHA_1 = new(1.0f, 1.0f, 1.0f, 1.0f);
     private readonly Color WHITE_ALPHA_0 = new(0.0f, 0.0f, 0.0f, 0.0f);
+
+    public static PlayerInventory instance { private set; get; }
 
     void Awake()
     {
@@ -50,6 +52,8 @@ public class PlayerInventory : MonoBehaviour
                 iconImage = slotT.GetChild(0).GetComponent<Image>()
             };
         }
+
+        instance = this;
     }
 
     public void Put(EquipableInfo info)
@@ -76,7 +80,10 @@ public class PlayerInventory : MonoBehaviour
             newCardTransform.localScale = Vector3.one;
             var combatController = newCardTransform.GetComponent<CombatCardController>();
             combatController.AssignItem(inventorySlot.equipmentInfo);
-            _combatCards.Add(combatController);
+            _combatCards.Add(new CombatSlotInfo() {
+                cardController = combatController,
+                rectTransform = newCardTransform
+            });
 
             // Clear items from inventory
             inventorySlot.equipmentInfo = null;
@@ -91,32 +98,39 @@ public class PlayerInventory : MonoBehaviour
         _slotsCount = 0;
         foreach (var combatCard in _combatCards)
         {
-            if (combatCard && !combatCard.wasUsed)
+            if (combatCard != null)
             {
-                Put(combatCard.assignedEquipment);
-                Destroy(combatCard.gameObject);
+                Put(combatCard.cardController.assignedEquipment);
+                Destroy(combatCard.rectTransform.gameObject);
             }
         }
     }
 
     public void OnCardClick(CombatCardController card)
     {
+        for (int i = 0; i < _combatCards.Count; i++)
+        {
+            if (_combatCards[i].cardController == card)
+            {
+                _combatCards.RemoveAt(i);
+                break;
+            }
+        }
         Destroy(card.gameObject);
-        // TODO FIX THIS
-        //RecalcCardsContainerSpacing();
+        RecalcCardsContainerSpacing();
     }
 
     [ContextMenu("__RecalcCardsContainerSpacing")]
     public void RecalcCardsContainerSpacing()
     {
-        if (_containerRect.childCount == 0)
+        if (_combatCards.Count == 0)
         {
             return;
         }
 
         var cardSize = 80;
         var cardSizeHalf = cardSize / 2;
-        var childCount = _containerRect.childCount;
+        var childCount = _combatCards.Count;
         var extraSpaceTaken = (childCount * cardSize) - _containerWidth;
 
         if (extraSpaceTaken > 0.0f)
@@ -127,21 +141,20 @@ public class PlayerInventory : MonoBehaviour
                 var lerpt = (float)i / (childCount-1);
                 var newPos = Mathf.Lerp(-containerBounds, containerBounds, lerpt);
 
-                var childRect = _containerRect.GetChild(i).GetComponent<RectTransform>();
-                childRect.anchoredPosition = new Vector2(newPos, 0);
+                _combatCards[i].rectTransform.anchoredPosition = new Vector2(newPos, 0);
             }
         }
         else
         {
             if (childCount == 1)
             {
-                _containerRect.GetChild(0).GetComponent<RectTransform>().anchoredPosition = Vector2.zero;
+                _combatCards[0].rectTransform.anchoredPosition = Vector2.zero;
                 return;
             }
 
             for (int i = 0; i < childCount; i++)
             {
-                _containerRect.GetChild(i).GetComponent<RectTransform>().anchoredPosition = new Vector2(i * cardSize, 0);
+                _combatCards[i].rectTransform.anchoredPosition = new Vector2(i * cardSize, 0);
             }
             float offset = childCount % 2 == 0
                 ? Mathf.Floor(childCount / 2) * cardSize - cardSizeHalf
@@ -149,7 +162,7 @@ public class PlayerInventory : MonoBehaviour
 
             for (int i = 0; i < childCount; i++)
             {
-                var childRect = _containerRect.GetChild(i).GetComponent<RectTransform>();
+                var childRect = _combatCards[i].rectTransform;
                 var pos = childRect.anchoredPosition;
                 childRect.anchoredPosition = new Vector2(pos.x - offset, 0);
             }
