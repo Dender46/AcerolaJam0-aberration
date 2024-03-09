@@ -6,10 +6,13 @@ using static ItemEquipable;
 
 public class PlayerInventory : MonoBehaviour
 {
+    [Header("RegularInventory")]
     [SerializeField] private Transform _slotsContainer;
-    [SerializeField] private Transform _combatCardsContainer;
+    [Header("Combat")]
+    [SerializeField] private RectTransform _combatCardsContainer;
     [SerializeField] private GameObject _combatCardPrefab;
-    [Header("Debug")]
+    [SerializeField] private float _containerHideOffsetY = 90.0f;
+    [Header("__Debug")]
     [SerializeField] private GameObject __debugEquipmentHeal;
     [SerializeField] private GameObject __debugEquipmentDamage;
 
@@ -31,7 +34,6 @@ public class PlayerInventory : MonoBehaviour
     private int _slotsCount = 0;
 
     private List<CombatSlotInfo> _combatCards = new();
-    private RectTransform _containerRect;
     private float _containerWidth;
 
     private readonly Color WHITE_ALPHA_1 = new(1.0f, 1.0f, 1.0f, 1.0f);
@@ -41,8 +43,7 @@ public class PlayerInventory : MonoBehaviour
 
     void Awake()
     {
-        _containerRect = _combatCardsContainer.GetComponent<RectTransform>();
-        _containerWidth = _containerRect.sizeDelta.x;
+        _containerWidth = _combatCardsContainer.sizeDelta.x;
 
         _slots = new SlotInfo[_slotsContainer.childCount];
         for (int i = 0; i < _slotsContainer.childCount; i++)
@@ -167,6 +168,16 @@ public class PlayerInventory : MonoBehaviour
                 childRect.anchoredPosition = new Vector2(pos.x - offset, 0);
             }
         }
+    }
+
+    public void HideCombatCards()
+    {
+        _combatCardsContainer.anchoredPosition = new Vector2(0.0f, _containerHideOffsetY);
+    }
+
+    public void ShowCombatCards()
+    {
+        _combatCardsContainer.anchoredPosition = Vector2.zero;
     }
 
     [ContextMenu("__DebugPutHeal")]

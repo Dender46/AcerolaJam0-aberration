@@ -4804,6 +4804,10 @@ PrefabInstance:
       value: Conveyor
       objectReference: {fileID: 0}
     - target: {fileID: 8318521124957137344, guid: acf005f7ef85d374ca71e5f47b588500, type: 3}
+      propertyPath: _conveyorTime
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8318521124957137344, guid: acf005f7ef85d374ca71e5f47b588500, type: 3}
       propertyPath: TEMP_SpawnCeil
       value: 2
       objectReference: {fileID: 0}
@@ -4881,17 +4885,9 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1491046320}
     - target: {fileID: 1828185159943354468, guid: 817cb69c87b025043b366796675e4398, type: 3}
-      propertyPath: __debugEquipmentHeal
-      value: 
-      objectReference: {fileID: 856288098985771318, guid: b9b463af064a5d344a8a2bf1b03c888e, type: 3}
-    - target: {fileID: 1828185159943354468, guid: 817cb69c87b025043b366796675e4398, type: 3}
       propertyPath: _combatCardsContainer
       value: 
       objectReference: {fileID: 1214889682}
-    - target: {fileID: 1828185159943354468, guid: 817cb69c87b025043b366796675e4398, type: 3}
-      propertyPath: __debugEquipmentDamage
-      value: 
-      objectReference: {fileID: 5388292104318864517, guid: e26c2eaec7e1db84e9fd1257b6e4faeb, type: 3}
     - target: {fileID: 4735825607885074231, guid: 817cb69c87b025043b366796675e4398, type: 3}
       propertyPath: m_LocalPosition.x
       value: -2.8

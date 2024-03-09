@@ -67,6 +67,7 @@ public class CombatSystem : MonoBehaviour
         }
 
         isPlayerTurn = false;
+        PlayerInventory.instance.HideCombatCards();
         UpdatePlayerAndEnemyUI();
         StartCoroutine(PlayerMoveInternal(equipableInfo));
     }
@@ -78,11 +79,11 @@ public class CombatSystem : MonoBehaviour
         // if enemy was killed or player lost
         if (GameManager.instance.gameState == GameManager.GameState.FightingEnemy)
         {
-            Debug.Log("EnemyAttacks");
             EnemyAttacks(_currentEnemy.damage);
             yield return new WaitForSeconds(attackWaitTime);
-            Debug.Log("Player can attack");
+            
             isPlayerTurn = true;
+            PlayerInventory.instance.ShowCombatCards();
         }
     }
 

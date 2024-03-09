@@ -47,3 +47,6 @@ MonoBehaviour:
   _slotsContainer: {fileID: 0}
   _combatCardsContainer: {fileID: 0}
   _combatCardPrefab: {fileID: 2192157514610475991, guid: f9019bd4403f34d479ab28613a541956, type: 3}
+  _containerHideOffsetY: -90
+  __debugEquipmentHeal: {fileID: 856288098985771318, guid: b9b463af064a5d344a8a2bf1b03c888e, type: 3}
+  __debugEquipmentDamage: {fileID: 5388292104318864517, guid: e26c2eaec7e1db84e9fd1257b6e4faeb, type: 3}
