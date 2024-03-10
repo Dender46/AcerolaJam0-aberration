@@ -61,7 +61,7 @@ public class CombatSystem : MonoBehaviour
             playerHP += equipableInfo.restoreHp;
         }
         if (equipableInfo.type.HasFlag(EquipableInfo.Type.Defence)) {
-            playerHP += equipableInfo.restoreDp;
+            playerDP += equipableInfo.restoreDp;
         }
         if (equipableInfo.type.HasFlag(EquipableInfo.Type.Damage)) {
             PlayerAttacksWith(equipableInfo.damage);
