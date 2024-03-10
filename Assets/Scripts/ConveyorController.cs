@@ -19,11 +19,17 @@ public class ConveyorController : MonoBehaviour
     public class FinishedMovingEventArgs : EventArgs
     {
         public GameObject item;
+        public bool levelFinished;
     }
 
     public event EventHandler<FinishedMovingEventArgs> onFinishMoving;
 
     private void Start()
+    {
+        ResetMe();
+    }
+
+    public void ResetMe()
     {
         var firstObject = Instantiate(_levelManager.GetNextItem()).transform;
         firstObject.SetParent(_containerForSpawnedObjects, false);
@@ -80,6 +86,7 @@ public class ConveyorController : MonoBehaviour
             Destroy(_objectsOnTheConveyor[2].gameObject);
         _objectsOnTheConveyor[2] = _objectsOnTheConveyor[1];
         _objectsOnTheConveyor[1] = _objectsOnTheConveyor[0];
+        _objectsOnTheConveyor[0] = null;
 
         
         var nextGO = _levelManager.GetNextItem();
@@ -95,7 +102,15 @@ public class ConveyorController : MonoBehaviour
         if (_objectsOnTheConveyor[1])
         {
             onFinishMoving?.Invoke(this, new FinishedMovingEventArgs(){
-                item = _objectsOnTheConveyor[1].gameObject
+                item = _objectsOnTheConveyor[1].gameObject,
+                levelFinished = false
+            });
+        }
+        else
+        {
+            onFinishMoving?.Invoke(this, new FinishedMovingEventArgs(){
+                item = null,
+                levelFinished = true
             });
         }
     }

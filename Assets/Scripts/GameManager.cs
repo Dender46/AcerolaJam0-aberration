@@ -37,6 +37,7 @@ public class GameManager : MonoBehaviour
         UpdateUI();
         conveyorController.onFinishMoving += OnConveyorFinished;
         CombatSystem.instance.onEnemyDefeated += OnEnemyKilled;
+        LevelFinishedScreen.instance.onScreenIsShown += OnLevelFinishedScreen_Finished;
     }
 
     private void Update()
@@ -47,7 +48,13 @@ public class GameManager : MonoBehaviour
     private void OnConveyorFinished(object sender, ConveyorController.FinishedMovingEventArgs args)
     {
         _gameState = GameState.ItemIsRegular;
-        if (args.item.TryGetComponent(out ItemEquipable equipBeh))
+        if (args.levelFinished)
+        {
+            Debug.Log("LEVLE FINSIHED");
+            _gameState = GameState.WaitingForConveyor;
+            LevelFinishedScreen.instance.Show();
+        }
+        else if (args.item.TryGetComponent(out ItemEquipable equipBeh))
         {
             _gameState = GameState.ItemIsGrabbable;
         }
@@ -63,6 +70,12 @@ public class GameManager : MonoBehaviour
         _gameState = GameState.WaitingForConveyor;
         conveyorController.ResumeConveyor();
         UpdateUI();
+    }
+
+    private void OnLevelFinishedScreen_Finished(object sender, EventArgs args)
+    {
+        LevelManager.instance.MoveToNextLevel();
+        conveyorController.ResetMe();
     }
 
     public void UI_ApproveCurrentItem()

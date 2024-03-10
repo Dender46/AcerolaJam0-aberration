@@ -7,7 +7,7 @@ public class LevelManager : MonoBehaviour
 {
     [SerializeField] private List<TextAsset> _levelInfos = new();
 
-    private int _currentLevel = 0;
+    private int _currentLevel = -1;
     private int _currentItemIndex = 0;
     private LevelInfo _currentLevelInfo;
 
@@ -33,10 +33,21 @@ public class LevelManager : MonoBehaviour
         public List<string> enemyItems;
     }
 
+    public static LevelManager instance { private set; get; }
+
     private void Awake()
     {
-        var levelInfo = _levelInfos[_currentLevel];
-        _currentLevelInfo = JsonUtility.FromJson<LevelInfo>(levelInfo.ToString());
+        MoveToNextLevel();
+
+        instance = this;
+    }
+
+    public void MoveToNextLevel()
+    {
+        _currentItemIndex = 0;
+        _currentLevel++;
+        var levelInfoJson = _levelInfos[_currentLevel].ToString();
+        _currentLevelInfo = JsonUtility.FromJson<LevelInfo>(levelInfoJson);
     }
 
     public GameObject GetNextItem()
