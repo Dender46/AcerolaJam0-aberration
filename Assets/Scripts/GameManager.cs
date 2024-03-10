@@ -37,7 +37,7 @@ public class GameManager : MonoBehaviour
         UpdateUI();
         conveyorController.onFinishMoving += OnConveyorFinished;
         CombatSystem.instance.onEnemyDefeated += OnEnemyKilled;
-        LevelFinishedScreen.instance.onScreenIsShown += OnLevelFinishedScreen_Finished;
+        LevelFinishedScreen.instance.onScreenIsFinished += OnLevelFinishedScreen_Finished;
     }
 
     private void Update()
@@ -50,7 +50,6 @@ public class GameManager : MonoBehaviour
         _gameState = GameState.ItemIsRegular;
         if (args.levelFinished)
         {
-            Debug.Log("LEVLE FINSIHED");
             _gameState = GameState.WaitingForConveyor;
             LevelFinishedScreen.instance.Show();
         }

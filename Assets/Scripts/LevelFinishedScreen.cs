@@ -1,12 +1,12 @@
 using System;
-using System.Collections;
+using TMPro;
 using UnityEngine;
 
 public class LevelFinishedScreen : MonoBehaviour
 {
-    [SerializeField] private float _showForSeconds = 2.0f;
+    [SerializeField] private TMP_Text _dayTextUI;
 
-    public event EventHandler onScreenIsShown;
+    public event EventHandler onScreenIsFinished;
 
     public static LevelFinishedScreen instance { private set; get; }
 
@@ -16,17 +16,18 @@ public class LevelFinishedScreen : MonoBehaviour
         instance = this;
     }
 
+    [ContextMenu("Show")]
     public void Show()
     {
+        _dayTextUI.text = "Day " + (LevelManager.instance.currentLevel + 1);
         gameObject.SetActive(true);
-        StartCoroutine(ShowCoroutine());
+        GetComponent<Animator>().SetTrigger("Show");
     }
 
-    private IEnumerator ShowCoroutine()
+    private void __EventFinished()
     {
-        yield return new WaitForSeconds(_showForSeconds);
         gameObject.SetActive(false);
-        onScreenIsShown?.Invoke(this, new EventArgs());
+        onScreenIsFinished?.Invoke(this, new EventArgs());
     }
 
 }

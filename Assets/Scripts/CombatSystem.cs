@@ -8,6 +8,7 @@ public class CombatSystem : MonoBehaviour
 {
     [SerializeField] private TMP_Text _enemyNameTextUI;
     [SerializeField] private TMP_Text _enemyHPTextUI;
+    [SerializeField] private TMP_Text _enemyDMGTextUI;
     [Space(7)]
     [SerializeField] private TMP_Text _playerHPTextUI;
     [SerializeField] private TMP_Text _playerDPTextUI;
@@ -119,26 +120,25 @@ public class CombatSystem : MonoBehaviour
 
     private void EnableUI()
     {
-        _enemyNameTextUI.gameObject.SetActive(true);
-        _enemyHPTextUI.gameObject  .SetActive(true);
-        _playerCombatStatsUI       .SetActive(true);
+        _enemyNameTextUI.transform.parent.gameObject.SetActive(true);
+        _playerCombatStatsUI.SetActive(true);
 
-        _inventoryUI               .SetActive(false);
+        _inventoryUI.SetActive(false);
     }
 
     private void DisableUI()
     {
-        _enemyNameTextUI.gameObject.SetActive(false);
-        _enemyHPTextUI.gameObject  .SetActive(false);
-        _playerCombatStatsUI       .SetActive(false);
+        _enemyNameTextUI.transform.parent.gameObject.SetActive(false);
+        _playerCombatStatsUI.SetActive(false);
 
-        _inventoryUI               .SetActive(true);
+        _inventoryUI.SetActive(true);
     }
 
     private void UpdatePlayerAndEnemyUI()
     {
         _enemyNameTextUI.text = _currentEnemy.enemyName;
         _enemyHPTextUI.text = "HP: " + _currentEnemy.hp;
+        _enemyDMGTextUI.text = "DMG: " + _currentEnemy.damage;
 
         _playerHPTextUI.text = playerHP.ToString();
         _playerDPTextUI.text = playerDP.ToString();

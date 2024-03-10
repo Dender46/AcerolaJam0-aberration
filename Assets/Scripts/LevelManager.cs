@@ -33,6 +33,8 @@ public class LevelManager : MonoBehaviour
         public List<string> enemyItems;
     }
 
+    public int currentLevel => _currentLevel;
+
     public static LevelManager instance { private set; get; }
 
     private void Awake()
@@ -77,8 +79,13 @@ public class LevelManager : MonoBehaviour
                 itemResourceStr += "Enemy/" + GetRandomFromList(_currentLevelInfo.enemyItems);
                 break;
         }
-        Debug.Log(itemResourceStr);
+
         result = Resources.Load<GameObject>(itemResourceStr);
+        if (!result)
+        {
+            Debug.LogError("Uknown prefab in level info: " + itemResourceStr);
+        }
+
         _currentItemIndex++;
 
         return result;
