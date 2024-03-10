@@ -1,0 +1,27 @@
+{
+    "ONLY_FOR_DEBUG": [
+        {"0": "Regular"},
+        {"1": "Damage"},
+        {"2": "Heal"},
+        {"3": "Defence"},
+        {"4": "Enemy"}
+    ],
+    "items": [0,0,0,0,1,0,0,1,4],
+    "regularItems": [
+        "PBrocolli",
+        "PPotStew",
+        "PPumpkin"
+    ],
+    "damageItems": [
+        "PCookingKnife"
+    ],
+    "healItems": [
+        "PApple"
+    ],
+    "defenceItems": [
+        
+    ],
+    "enemyItems": [
+        "PTurkey"
+    ]
+}

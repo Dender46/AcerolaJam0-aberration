@@ -3,8 +3,7 @@ using UnityEngine;
 
 public class ConveyorController : MonoBehaviour
 {
-    [SerializeField] private GameObject[] _availableObjects;
-    [SerializeField] private GameObject[] _availableEnemies;
+    [SerializeField] private LevelManager _levelManager;
     [SerializeField] private float _conveyorTime = 5.0f;
     [SerializeField] private AnimationCurve _animationCurve;
     [SerializeField] private Vector3 _center;
@@ -13,7 +12,6 @@ public class ConveyorController : MonoBehaviour
     [SerializeField] private Transform _containerForSpawnedObjects;
 
     private Transform[] _objectsOnTheConveyor = new Transform[3];
-    public int TEMP_SpawnCeil = 3;
 
     private float _timer = 0.0f;
     private bool _isMoving = false;
@@ -27,7 +25,7 @@ public class ConveyorController : MonoBehaviour
 
     private void Start()
     {
-        var firstObject = Instantiate(GetRandomAvailableObject()).transform;
+        var firstObject = Instantiate(_levelManager.GetNextItem()).transform;
         firstObject.SetParent(_containerForSpawnedObjects, false);
         firstObject.localPosition = _spawnPoint;
         _objectsOnTheConveyor[0] = firstObject;
@@ -83,21 +81,23 @@ public class ConveyorController : MonoBehaviour
         _objectsOnTheConveyor[2] = _objectsOnTheConveyor[1];
         _objectsOnTheConveyor[1] = _objectsOnTheConveyor[0];
 
-        var newObject = Instantiate(GetRandomAvailableObject()).transform;
-        newObject.SetParent(_containerForSpawnedObjects, false);
-        newObject.localPosition = _spawnPoint;
-        _objectsOnTheConveyor[0] = newObject;
+        
+        var nextGO = _levelManager.GetNextItem();
+        if (nextGO != null) // finished progression and there are still items left
+        {
+            var newObject = Instantiate(nextGO).transform;
+            newObject.SetParent(_containerForSpawnedObjects, false);
+            newObject.localPosition = _spawnPoint;
+            _objectsOnTheConveyor[0] = newObject;
+        }
 
-        onFinishMoving?.Invoke(this, new FinishedMovingEventArgs(){
-            item = _objectsOnTheConveyor[1].gameObject
-        });
-    }
-
-    private GameObject GetRandomAvailableObject()
-    {
-        return _availableObjects[UnityEngine.Random.Range(0, TEMP_SpawnCeil)];
-        //return _availableObjects[Random.Range(0, _availableObjects.Length)];
-        //return _availableObjects[0];
+        // All items have gone through conveyor
+        if (_objectsOnTheConveyor[1])
+        {
+            onFinishMoving?.Invoke(this, new FinishedMovingEventArgs(){
+                item = _objectsOnTheConveyor[1].gameObject
+            });
+        }
     }
 
     private void OnDrawGizmosSelected()

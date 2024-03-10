@@ -7,7 +7,6 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject _declineBttn;
     [SerializeField] private GameObject _grabBttn;
     [SerializeField] private GameObject _fightBttn;
-
     public ConveyorController conveyorController;
 
     public bool inputIsBlocked { private set; get; }
