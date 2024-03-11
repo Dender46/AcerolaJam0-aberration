@@ -16,14 +16,19 @@ public class ItemEquipable : MonoBehaviour
         }
 
         public string name;
+        public Type type;
         [HideInInspector] public Sprite preview; // asigned from this component OnEnable()
 
-        public Type type;
+        [Space(5)]
         public int damage = 10;
         public int defence = 2;
 
+        [Space(5)]
         public int restoreHp = 2;
         public int restoreDp = 2;
+
+        [Space(5)]
+        public int cost = 2;
         public int haveUses = 2;
     }
 

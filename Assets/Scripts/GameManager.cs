@@ -1,12 +1,16 @@
 using System;
+using TMPro;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
+    [Header("Bttns")]
     [SerializeField] private GameObject _approveBttn;
     [SerializeField] private GameObject _declineBttn;
     [SerializeField] private GameObject _grabBttn;
     [SerializeField] private GameObject _fightBttn;
+    [Header("Economy")]
+    [SerializeField] private TMP_Text _coinsTextUI;
     public ConveyorController conveyorController;
 
     public bool inputIsBlocked { private set; get; }
@@ -23,6 +27,8 @@ public class GameManager : MonoBehaviour
     private int _enemyItemLayer;
     private GameState _gameState = GameState.WaitingForConveyor;
     public GameState gameState => _gameState;
+
+    private int _playerCoins = 0;
 
     public static GameManager instance { private set; get; }
 
@@ -101,12 +107,21 @@ public class GameManager : MonoBehaviour
     {
         if (!inputIsBlocked)
         {
-            _gameState = GameState.WaitingForConveyor;
-            var grabbedItem = conveyorController.GrabCurrentItem();
-            PlayerInventory.instance.Put(grabbedItem.GetComponent<ItemEquipable>().info);
-            Destroy(grabbedItem);
-            conveyorController.ResumeConveyor();
-            UpdateUI();
+            var grabbedItem = conveyorController.PeekCurrentItem();
+            var equipmentInfo = grabbedItem.GetComponent<ItemEquipable>().info;
+            if (equipmentInfo.cost != 0 && equipmentInfo.cost < _playerCoins)
+            {
+                _gameState = GameState.WaitingForConveyor;
+                PlayerInventory.instance.Put(equipmentInfo);
+                Destroy(grabbedItem);
+                conveyorController.ResumeConveyor();
+                _playerCoins -= equipmentInfo.cost;
+                UpdateUI();
+            }
+            else
+            {
+                Debug.Log("Can't grab cost too high");
+            }
         }
     }
 
@@ -115,7 +130,7 @@ public class GameManager : MonoBehaviour
         if (!inputIsBlocked)
         {
             _gameState = GameState.FightingEnemy;
-            var grabbedItem = conveyorController.GrabCurrentItem();
+            var grabbedItem = conveyorController.PeekCurrentItem();
             var spawnedEnemy = Instantiate(grabbedItem.GetComponent<ItemEnemy>().enemyPrefab);
             spawnedEnemy.transform.position = grabbedItem.transform.position;
             Destroy(grabbedItem);
@@ -127,6 +142,7 @@ public class GameManager : MonoBehaviour
 
     private void UpdateUI()
     {
+        _coinsTextUI.text = _playerCoins.ToString();
         switch (_gameState)
         {
             case GameState.WaitingForConveyor:

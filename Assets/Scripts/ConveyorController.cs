@@ -67,7 +67,7 @@ public class ConveyorController : MonoBehaviour
         _isMoving = true;
     }
 
-    public GameObject GrabCurrentItem()
+    public GameObject PeekCurrentItem()
     {
         return _objectsOnTheConveyor[1].gameObject;
     }

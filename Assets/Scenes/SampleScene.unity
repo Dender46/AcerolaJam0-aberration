@@ -471,63 +471,6 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 8976998117457113139, guid: 7a79153d55a6ec74ca7d2152185f6f5f, type: 3}
   m_PrefabInstance: {fileID: 154807927}
   m_PrefabAsset: {fileID: 0}
---- !u!1001 &234510212
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: -8679921383154817045, guid: 10f77a6206555f7439b29a4571c16416, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 10f77a6206555f7439b29a4571c16416, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 10f77a6206555f7439b29a4571c16416, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 10f77a6206555f7439b29a4571c16416, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0.630698
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 10f77a6206555f7439b29a4571c16416, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0.38048238
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 10f77a6206555f7439b29a4571c16416, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0.5791302
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 10f77a6206555f7439b29a4571c16416, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0.34937283
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 10f77a6206555f7439b29a4571c16416, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 4.317
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 10f77a6206555f7439b29a4571c16416, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 87.719
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 10f77a6206555f7439b29a4571c16416, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 62.117
-      objectReference: {fileID: 0}
-    - target: {fileID: 919132149155446097, guid: 10f77a6206555f7439b29a4571c16416, type: 3}
-      propertyPath: m_Name
-      value: coin-model
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 10f77a6206555f7439b29a4571c16416, type: 3}
 --- !u!1 &253215963
 GameObject:
   m_ObjectHideFlags: 0
@@ -4393,7 +4336,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -635093216, guid: 2e5653be5a0e8d84594e3b0f7b289baf, type: 3}
+  m_Sprite: {fileID: 1300251339, guid: 2e5653be5a0e8d84594e3b0f7b289baf, type: 3}
   m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -5229,7 +5172,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: -4, y: -0.0000038146973}
+  m_AnchoredPosition: {x: -7.14, y: -0.0000038146973}
   m_SizeDelta: {x: 29.1, y: 30}
   m_Pivot: {x: 1, y: 0.5}
 --- !u!114 &1891949885
@@ -5261,8 +5204,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4280577336
-  m_fontColor: {r: 0.22034483, g: 0.426, b: 0.13955171, a: 1}
+    rgba: 4287853084
+  m_fontColor: {r: 0.111294046, g: 0.44538367, b: 0.5754717, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 2
   m_fontColorGradient:
@@ -6271,6 +6214,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1954848341}
     - target: {fileID: 5474771637980431987, guid: fff19cc3d1293bb40b0ce2550d28f16e, type: 3}
+      propertyPath: _coinsTextUI
+      value: 
+      objectReference: {fileID: 1891949885}
+    - target: {fileID: 5474771637980431987, guid: fff19cc3d1293bb40b0ce2550d28f16e, type: 3}
       propertyPath: _declineBttn
       value: 
       objectReference: {fileID: 568298923}
@@ -6462,4 +6409,3 @@ SceneRoots:
   - {fileID: 7315934944883860359}
   - {fileID: 4867575550376745775}
   - {fileID: 7484749578748488360}
-  - {fileID: 234510212}
