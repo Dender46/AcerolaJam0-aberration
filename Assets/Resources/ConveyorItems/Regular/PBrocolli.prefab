@@ -8,6 +8,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 334788895558486870, guid: cbf58e0749ed40e43a80b4ca5ef7609d, type: 3}
+      propertyPath: price
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 334788895558486870, guid: cbf58e0749ed40e43a80b4ca5ef7609d, type: 3}
+      propertyPath: _price
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 5574089062023156028, guid: cbf58e0749ed40e43a80b4ca5ef7609d, type: 3}
       propertyPath: m_Name
       value: PBrocolli

@@ -10,6 +10,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject _grabBttn;
     [SerializeField] private GameObject _fightBttn;
     [Header("Economy")]
+    [SerializeField] private RectTransform _coinsContainerUI;
     [SerializeField] private TMP_Text _coinsTextUI;
     public ConveyorController conveyorController;
 
@@ -87,6 +88,8 @@ public class GameManager : MonoBehaviour
     {
         if (!inputIsBlocked)
         {
+            var currItem = conveyorController.PeekCurrentItem().GetComponent<ConveyorItem>();
+            _playerCoins += currItem.price;
             _gameState = GameState.WaitingForConveyor;
             conveyorController.ResumeConveyor();
             UpdateUI();
@@ -109,7 +112,7 @@ public class GameManager : MonoBehaviour
         {
             var grabbedItem = conveyorController.PeekCurrentItem();
             var equipmentInfo = grabbedItem.GetComponent<ItemEquipable>().info;
-            if (equipmentInfo.cost != 0 && equipmentInfo.cost < _playerCoins)
+            if (equipmentInfo.cost == 0 || equipmentInfo.cost <= _playerCoins)
             {
                 _gameState = GameState.WaitingForConveyor;
                 PlayerInventory.instance.Put(equipmentInfo);
@@ -150,30 +153,35 @@ public class GameManager : MonoBehaviour
                 _declineBttn.SetActive(false);
                 _grabBttn   .SetActive(false);
                 _fightBttn  .SetActive(false);
+                _coinsContainerUI.gameObject.SetActive(true);
                 break;
             case GameState.ItemIsRegular:
                 _approveBttn.SetActive(true);
                 _declineBttn.SetActive(true);
                 _grabBttn   .SetActive(false);
                 _fightBttn  .SetActive(false);
+                _coinsContainerUI.gameObject.SetActive(true);
                 break;
             case GameState.ItemIsGrabbable:
                 _approveBttn.SetActive(true);
                 _declineBttn.SetActive(true);
                 _grabBttn   .SetActive(true);
                 _fightBttn  .SetActive(false);
+                _coinsContainerUI.gameObject.SetActive(true);
                 break; 
             case GameState.ItemIsEnemy:
                 _approveBttn.SetActive(true);
                 _declineBttn.SetActive(false);
                 _grabBttn   .SetActive(false);
                 _fightBttn  .SetActive(true);
+                _coinsContainerUI.gameObject.SetActive(true);
                 break; 
             case GameState.FightingEnemy: 
                 _approveBttn.SetActive(false);
                 _declineBttn.SetActive(false);
                 _grabBttn   .SetActive(false);
                 _fightBttn  .SetActive(false);
+                _coinsContainerUI.gameObject.SetActive(false);
                 break;
             default:
                 throw new UnityException("Unknonw GameState");
