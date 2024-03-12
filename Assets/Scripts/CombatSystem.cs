@@ -43,6 +43,7 @@ public class CombatSystem : MonoBehaviour
         EnableUI();
         UpdatePlayerAndEnemyUI();
         PlayerInventory.instance.TurnItemsToCards();
+        PlayerInventory.instance.ShowCombatCards();
         _cameraAnimator.SetTrigger("EngageForCombat");
         isPlayerTurn = true;
     }

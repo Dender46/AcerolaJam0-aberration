@@ -125,8 +125,8 @@ MonoBehaviour:
   price: 5
   _costTextUI: {fileID: 8557949836502869728}
   _canvasUI: {fileID: 6238672348301802735}
-  _gainsColor: {r: 0.10208259, g: 0.5849056, b: 0.11963977, a: 1}
-  _lossColor: {r: 0.5294118, g: 0.101960786, b: 0.16078432, a: 1}
+  _gainsColor: {r: 0, g: 0.78431374, b: 0.1254902, a: 1}
+  _lossColor: {r: 0.8, g: 0.02745098, b: 0.13333334, a: 1}
 --- !u!1 &6947043908100086961
 GameObject:
   m_ObjectHideFlags: 0
@@ -195,14 +195,14 @@ MonoBehaviour:
   m_text: +100
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 5302535af1044152a457ed104f1f4b91, type: 2}
-  m_sharedMaterial: {fileID: 2164040, guid: 5302535af1044152a457ed104f1f4b91, type: 2}
+  m_sharedMaterial: {fileID: 2100000, guid: b246c4190f4e46ec9352fe15a7b09ce0, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4280259866
-  m_fontColor: {r: 0.101960786, g: 0.58431375, b: 0.12156863, a: 1}
+    rgba: 4280338432
+  m_fontColor: {r: 0, g: 0.78431374, b: 0.1254902, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -376,6 +376,7 @@ GameObject:
   - component: {fileID: 8033222557381738213}
   - component: {fileID: 3876912083342040057}
   - component: {fileID: 8333488822565627113}
+  - component: {fileID: 6240052959069185290}
   m_Layer: 5
   m_Name: BG
   m_TagString: Untagged
@@ -423,7 +424,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.9481132, g: 1, b: 0.997838, a: 1}
+  m_Color: {r: 0.977, g: 1, b: 0.99823076, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -440,6 +441,21 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &6240052959069185290
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8200033238668849040}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cfabb0440166ab443bba8876756fdfa9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 0, g: 0, b: 0, a: 0.5}
+  m_EffectDistance: {x: 2, y: -2}
+  m_UseGraphicAlpha: 1
 --- !u!1001 &6279046230492662107
 PrefabInstance:
   m_ObjectHideFlags: 0

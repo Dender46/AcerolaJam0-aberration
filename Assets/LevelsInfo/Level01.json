@@ -6,9 +6,9 @@
         {"3": "Defence"},
         {"4": "Enemy"}
     ],
-    "items_REAL": [0,0,0,0,1,0,0,1,4],
+    "items": [0,0,0,0,1,0,0,1,4],
     "items1":  [1,1,4],
-    "items":  [0,1,2,3,4],
+    "items2":  [0,1,2,3,4],
     "regularItems": [
         "PBrocolli",
         "PPotStew",
