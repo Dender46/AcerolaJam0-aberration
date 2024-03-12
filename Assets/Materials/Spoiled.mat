@@ -81,7 +81,7 @@ Material:
     - _SrcBlend: 1
     - _UVSec: 0
     - _ZWrite: 1
-    - _alpha: 0.2
+    - _alpha: 0
     - _amount: 0.36
     m_Colors:
     - _Color: {r: 0.4538562, g: 0.8784314, b: 0, a: 1}

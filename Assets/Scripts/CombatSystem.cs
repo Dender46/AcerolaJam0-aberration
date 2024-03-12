@@ -22,6 +22,7 @@ public class CombatSystem : MonoBehaviour
     public float attackWaitTime = 1.0f;
 
     private Animator _cameraAnimator;
+    private Animator _directionalLightsAnimator;
 
     private EnemyBehaviour _currentEnemy;
     public bool isPlayerTurn = true;
@@ -33,6 +34,7 @@ public class CombatSystem : MonoBehaviour
     void Start()
     {
         _cameraAnimator = Camera.main.GetComponent<Animator>();
+        _directionalLightsAnimator = GameObject.Find("Directional Light").GetComponent<Animator>();
         DisableUI();
         instance = this;
     }
@@ -45,6 +47,7 @@ public class CombatSystem : MonoBehaviour
         PlayerInventory.instance.TurnItemsToCards();
         PlayerInventory.instance.ShowCombatCards();
         _cameraAnimator.SetTrigger("EngageForCombat");
+        _directionalLightsAnimator.SetTrigger("EngageForCombat");
         isPlayerTurn = true;
     }
 
@@ -56,6 +59,7 @@ public class CombatSystem : MonoBehaviour
             DisableUI();
             PlayerInventory.instance.TurnCardsToItems();
             _cameraAnimator.SetTrigger("DisengageFromCombat");
+            _directionalLightsAnimator.SetTrigger("DisengageFromCombat");
 
             onEnemyDefeated?.Invoke(this, EventArgs.Empty);
         }
