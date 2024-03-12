@@ -24,6 +24,7 @@ public class LevelManager : MonoBehaviour
             Enemy
         }
 
+        public float spoiledChance;
         public List<ItemType> items;
 
         public List<string> regularItems;
@@ -50,6 +51,11 @@ public class LevelManager : MonoBehaviour
         _currentLevel++;
         var levelInfoJson = _levelInfos[_currentLevel].ToString();
         _currentLevelInfo = JsonUtility.FromJson<LevelInfo>(levelInfoJson);
+    }
+
+    public bool IsItemSpoiled()
+    {
+        return Random.Range(0.0f, 1.0f) < _currentLevelInfo.spoiledChance;
     }
 
     public GameObject GetNextItem()
