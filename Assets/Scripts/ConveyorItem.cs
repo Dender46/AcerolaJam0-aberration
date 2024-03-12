@@ -14,13 +14,16 @@ public class ConveyorItem : MonoBehaviour
     [SerializeField] private GameObject _spoiledEffectRef;
     [SerializeField] private ParticleSystem _spoiledParticlesRef;
 
+    public bool isSpoiled = false;
+
     private void Start()
     {
         if (TryGetComponent(out ItemEquipable equip))
         {
             price = equip.info.cost;
-            _costTextUI.text = "-" + equip.info.cost;
-            _costTextUI.color = _lossColor;
+            _costTextUI.text = "" + equip.info.cost;
+            //_costTextUI.text = "-" + equip.info.cost;
+            //_costTextUI.color = _lossColor;
         }
         else if (TryGetComponent(out ItemEnemy enemy))
         {
@@ -28,9 +31,11 @@ public class ConveyorItem : MonoBehaviour
         }
         else
         {
-            _costTextUI.text = "+" + price;
-            _costTextUI.color = _gainsColor;
-            if (LevelManager.instance.IsItemSpoiled())
+            _costTextUI.text = "" + price;
+            //_costTextUI.text = "+" + price;
+            //_costTextUI.color = _gainsColor;
+            isSpoiled = LevelManager.instance.IsItemSpoiled();
+            if (isSpoiled)
             {
                 _spoiledEffectRef.SetActive(true);
                 _spoiledParticlesRef.Play();

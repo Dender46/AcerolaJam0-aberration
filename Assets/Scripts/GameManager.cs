@@ -89,7 +89,7 @@ public class GameManager : MonoBehaviour
         if (!inputIsBlocked)
         {
             var currItem = conveyorController.PeekCurrentItem().GetComponent<ConveyorItem>();
-            _playerCoins += currItem.price;
+            _playerCoins += currItem.isSpoiled ? -currItem.price : currItem.price;
             _gameState = GameState.WaitingForConveyor;
             conveyorController.ResumeConveyor();
             UpdateUI();
@@ -100,6 +100,8 @@ public class GameManager : MonoBehaviour
     {
         if (!inputIsBlocked)
         {
+            var currItem = conveyorController.PeekCurrentItem().GetComponent<ConveyorItem>();
+            _playerCoins += currItem.isSpoiled ? currItem.price : -currItem.price;
             _gameState = GameState.WaitingForConveyor;
             conveyorController.ResumeConveyor();
             UpdateUI();
