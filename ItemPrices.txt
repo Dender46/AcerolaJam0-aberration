@@ -1,0 +1,16 @@
+--- Regular
+1 PBrocolli
+3 PLoaf
+3 PPineapple
+4 PPumpkin
+4 PWholeHam
+15 PPotstew
+
+--- Damage
+5 PCookingKnife
+
+--- Defence
+3 PBurger
+
+--- Heal
+1 PApple
