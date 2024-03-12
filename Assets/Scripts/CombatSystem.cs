@@ -31,7 +31,7 @@ public class CombatSystem : MonoBehaviour
 
     public static CombatSystem instance { private set; get; }
 
-    void Start()
+    private void Awake()
     {
         _cameraAnimator = Camera.main.GetComponent<Animator>();
         _directionalLightsAnimator = GameObject.Find("Directional Light").GetComponent<Animator>();
