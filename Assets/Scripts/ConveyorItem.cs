@@ -7,6 +7,7 @@ public class ConveyorItem : MonoBehaviour
 
     [Header("References")]
     [SerializeField] private TMP_Text _costTextUI;
+    [SerializeField] private TMP_Text _spoilLevelTextUI;
     [SerializeField] private RectTransform _canvasUI;
     [SerializeField] private Color _gainsColor = Color.green;
     [SerializeField] private Color _lossColor = Color.red;
@@ -14,7 +15,7 @@ public class ConveyorItem : MonoBehaviour
     [SerializeField] private GameObject _spoiledEffectRef;
     [SerializeField] private ParticleSystem _spoiledParticlesRef;
 
-    public bool isSpoiled = false;
+    public int spoilLevel = 0;
 
     private void Start()
     {
@@ -34,8 +35,9 @@ public class ConveyorItem : MonoBehaviour
             _costTextUI.text = "" + price;
             //_costTextUI.text = "+" + price;
             //_costTextUI.color = _gainsColor;
-            isSpoiled = LevelManager.instance.IsItemSpoiled();
-            if (isSpoiled)
+            spoilLevel = (int)Mathf.Floor(Random.Range(0.0f, 100.0f));
+            _spoilLevelTextUI.text = spoilLevel + "%";
+            if (spoilLevel > 40.0f)
             {
                 _spoiledEffectRef.SetActive(true);
                 _spoiledParticlesRef.Play();

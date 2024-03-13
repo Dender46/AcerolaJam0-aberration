@@ -1,12 +1,16 @@
 using System;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
 public class LevelManager : MonoBehaviour
 {
+    [SerializeField] private RectTransform _taskCanvas;
+    [SerializeField] private TMP_Text _taskDescription;
     [SerializeField] private List<TextAsset> _levelInfos = new();
 
+    private int _currentSpoilTarget;
     private int _currentLevel = -1;
     private int _currentItemIndex = 0;
     private LevelInfo _currentLevelInfo;
@@ -24,6 +28,10 @@ public class LevelManager : MonoBehaviour
             Enemy
         }
 
+        public int isTutorial;
+        public List<int> pricesRange;
+        public List<int> spoilRangeTarget;
+
         public float spoiledChance;
         public List<ItemType> items;
 
@@ -34,6 +42,7 @@ public class LevelManager : MonoBehaviour
         public List<string> enemyItems;
     }
 
+    public float currentSpoilTarget => _currentSpoilTarget;
     public int currentLevel => _currentLevel;
 
     public static LevelManager instance { private set; get; }
@@ -51,11 +60,18 @@ public class LevelManager : MonoBehaviour
         _currentLevel++;
         var levelInfoJson = _levelInfos[_currentLevel].ToString();
         _currentLevelInfo = JsonUtility.FromJson<LevelInfo>(levelInfoJson);
-    }
 
-    public bool IsItemSpoiled()
-    {
-        return Random.Range(0.0f, 1.0f) < _currentLevelInfo.spoiledChance;
+        if (_currentLevelInfo.spoilRangeTarget.Count == 0)
+        {
+            _taskCanvas.gameObject.SetActive(false);
+        }
+        else
+        {
+            _taskCanvas.gameObject.SetActive(true);
+            _currentSpoilTarget = _currentLevelInfo.spoilRangeTarget[Random.Range(0, _currentLevelInfo.spoilRangeTarget.Count)];
+            var textWithSpoilTarget = _taskDescription.text.Replace("<SPOIL_TARGET>", _currentSpoilTarget.ToString());
+            _taskDescription.text = textWithSpoilTarget;
+        }
     }
 
     public GameObject GetNextItem()
