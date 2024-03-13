@@ -9,6 +9,7 @@
     
     "isTutorial": 1,
     "pricesRange": [1.0, 3.0],
+    "spoilRangeTarget": [10, 20, 30, 40, 50],
 
     "items": [0,0,0,0,4],
     "spoiledChance": 0.6,

@@ -6,6 +6,15 @@
         {"3": "Defence"},
         {"4": "Enemy"}
     ],
+
+    "spoilRangeTarget": [
+        
+        30,
+        40,
+        50,
+        60
+    ],
+
     "spoiledChance": 0.5,
     "items": [0,0,0,0,1,0,0,1,4],
     "regularItems": [

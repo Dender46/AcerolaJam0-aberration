@@ -530,7 +530,7 @@ TextureImporter:
         width: 19
         height: 26
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 4, y: 4, z: 4, w: 4}
       outline: []
       physicsShape: []
@@ -538,6 +538,27 @@ TextureImporter:
       bones: []
       spriteID: 4e563e899e3f3d645b10a4ed8164aec1
       internalID: -1779934226
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: uipackSpace_sheet_3
+      rect:
+        serializedVersion: 2
+        x: 200
+        y: 313
+        width: 100
+        height: 99
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 10, y: 9, z: 10, w: 31}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f1309ec98525d824ea0ac80e335753f7
+      internalID: 1941682027
       vertices: []
       indices: 
       edges: []

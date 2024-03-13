@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 4578310273055311661}
   - component: {fileID: 2071757987015226545}
   - component: {fileID: 7495148500089335131}
+  - component: {fileID: 1514266182263428927}
   m_Layer: 5
   m_Name: CoinIcon
   m_TagString: Untagged
@@ -34,8 +35,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: -7.6, y: -0.00000004021649}
-  m_SizeDelta: {x: 18.86, y: 22.74}
+  m_AnchoredPosition: {x: -9.42, y: -0.00000004021649}
+  m_SizeDelta: {x: 23, y: 23}
   m_Pivot: {x: 1, y: 0.5}
 --- !u!222 &2071757987015226545
 CanvasRenderer:
@@ -65,7 +66,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 4d314fcf2859f7d47a2ee1f8d68ee494, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 15202df8e3269444ea16f2290515424b, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -75,6 +76,21 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &1514266182263428927
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3315022919686675893}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cfabb0440166ab443bba8876756fdfa9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 0, g: 0, b: 0, a: 0.29803923}
+  m_EffectDistance: {x: 0.5, y: 0}
+  m_UseGraphicAlpha: 1
 --- !u!1 &5563129904568940201
 GameObject:
   m_ObjectHideFlags: 0
