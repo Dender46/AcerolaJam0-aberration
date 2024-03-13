@@ -10,6 +10,8 @@ public class LevelManager : MonoBehaviour
     [SerializeField] private TMP_Text _taskDescription;
     [SerializeField] private List<TextAsset> _levelInfos = new();
 
+    private string _taskDescriptionStr = "Decline items which are spoiled <color=#0083BB>beyond <SPOIL_TARGET>%</color>\r\n";
+
     private int _currentSpoilTarget = -1;
     private int _currentLevel = -1;
     private int _currentItemIndex = 0;
@@ -44,6 +46,7 @@ public class LevelManager : MonoBehaviour
 
     public float currentSpoilTarget => _currentSpoilTarget;
     public int currentLevel => _currentLevel;
+    public bool levelIsTutorial => _currentLevelInfo.isTutorial == 1;
 
     public static LevelManager instance { private set; get; }
 
@@ -70,7 +73,7 @@ public class LevelManager : MonoBehaviour
         {
             _taskCanvas.gameObject.SetActive(true);
             _currentSpoilTarget = _currentLevelInfo.spoilRangeTarget[Random.Range(0, _currentLevelInfo.spoilRangeTarget.Count)];
-            var textWithSpoilTarget = _taskDescription.text.Replace("<SPOIL_TARGET>", _currentSpoilTarget.ToString());
+            var textWithSpoilTarget = _taskDescriptionStr.Replace("<SPOIL_TARGET>", _currentSpoilTarget.ToString());
             _taskDescription.text = textWithSpoilTarget;
         }
     }

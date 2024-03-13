@@ -7,12 +7,7 @@
         {"4": "Enemy"}
     ],
 
-    "spoilRangeTarget": [
-        30,
-        40,
-        50,
-        60
-    ],
+    "spoilRangeTarget": [25,30,35,40],
 
     "spoiledChance": 0.4,
     "items": [0,0,0,0,1,0,0,1,4],

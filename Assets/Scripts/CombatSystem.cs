@@ -28,6 +28,7 @@ public class CombatSystem : MonoBehaviour
     public bool isPlayerTurn = true;
     
     public event EventHandler onEnemyDefeated;
+    public event EventHandler onEnemyWon;
 
     public static CombatSystem instance { private set; get; }
 
@@ -48,42 +49,61 @@ public class CombatSystem : MonoBehaviour
         PlayerInventory.instance.ShowCombatCards();
         _cameraAnimator.SetTrigger("EngageForCombat");
         _directionalLightsAnimator.SetTrigger("EngageForCombat");
+
+        if (PlayerInventory.instance.CombatCardsCount == 0)
+        {
+            Invoke(nameof(PlayerMoveNull), 1.0f);
+        }
+
         isPlayerTurn = true;
     }
 
     public void EndTheFight(bool isWin)
     {
+        _currentEnemy.OnDefeated();
+        DisableUI();
+        PlayerInventory.instance.TurnCardsToItems();
+        _cameraAnimator.SetTrigger("DisengageFromCombat");
+        _directionalLightsAnimator.SetTrigger("DisengageFromCombat");
+
         if (isWin)
-        {
-            _currentEnemy.OnDefeated();
-            DisableUI();
-            PlayerInventory.instance.TurnCardsToItems();
-            _cameraAnimator.SetTrigger("DisengageFromCombat");
-            _directionalLightsAnimator.SetTrigger("DisengageFromCombat");
-
             onEnemyDefeated?.Invoke(this, EventArgs.Empty);
-        }
+        else
+            onEnemyWon?.Invoke(this, EventArgs.Empty);
     }
 
-    public void PlayerMove(EquipableInfo equipableInfo)
+    private void PlayerMoveNull()
     {
-        if (equipableInfo.type.HasFlag(EquipableInfo.Type.Heal)) {
-            playerHP += equipableInfo.restoreHp;
-        }
-        if (equipableInfo.type.HasFlag(EquipableInfo.Type.Defence)) {
-            playerDP += equipableInfo.restoreDp;
-        }
-        if (equipableInfo.type.HasFlag(EquipableInfo.Type.Damage)) {
-            PlayerAttacksWith(equipableInfo.damage);
-        }
-
-        isPlayerTurn = false;
-        PlayerInventory.instance.HideCombatCards();
-        UpdatePlayerAndEnemyUI();
-        StartCoroutine(PlayerMoveInternal(equipableInfo));
+        PlayerMove(null);
     }
 
-    private IEnumerator PlayerMoveInternal(EquipableInfo equipableInfo)
+    public void PlayerMove(EquipableInfo equipableInfo = null)
+    {
+        if (equipableInfo != null)
+        {
+            if (equipableInfo.type.HasFlag(EquipableInfo.Type.Heal)) {
+                playerHP += equipableInfo.restoreHp;
+            }
+            if (equipableInfo.type.HasFlag(EquipableInfo.Type.Defence)) {
+                playerDP += equipableInfo.restoreDp;
+            }
+            if (equipableInfo.type.HasFlag(EquipableInfo.Type.Damage)) {
+                PlayerAttacksWith(equipableInfo.damage);
+            }
+
+            isPlayerTurn = false;
+            PlayerInventory.instance.HideCombatCards();
+            UpdatePlayerAndEnemyUI();
+        }
+        else
+        {
+            isPlayerTurn = false;
+        }
+
+        StartCoroutine(PlayerMoveInternal());
+    }
+
+    private IEnumerator PlayerMoveInternal()
     {
         yield return new WaitForSeconds(attackWaitTime);
 
@@ -111,7 +131,7 @@ public class CombatSystem : MonoBehaviour
             playerHP -= dmgAfterDP;
         }
 
-        if (playerHP <= 0)
+        if (playerHP <= 0 || PlayerInventory.instance.CombatCardsCount == 0)
         {
             EndTheFight(false);
         }

@@ -39,6 +39,8 @@ public class PlayerInventory : MonoBehaviour
     private readonly Color WHITE_ALPHA_1 = new(1.0f, 1.0f, 1.0f, 1.0f);
     private readonly Color WHITE_ALPHA_0 = new(0.0f, 0.0f, 0.0f, 0.0f);
 
+    public int CombatCardsCount => _combatCards.Count;
+
     public static PlayerInventory instance { private set; get; }
 
     void Awake()

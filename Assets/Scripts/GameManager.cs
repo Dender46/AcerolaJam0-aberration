@@ -9,6 +9,9 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject _declineBttn;
     [SerializeField] private GameObject _grabBttn;
     [SerializeField] private GameObject _fightBttn;
+    [Header("Screens")]
+    [SerializeField] private LevelFinishedScreen _levelFinishedScreen;
+    [SerializeField] private LevelFinishedScreen _combatLostScreen;
     [Header("Economy")]
     [SerializeField] private RectTransform _coinsContainerUI;
     [SerializeField] private TMP_Text _coinsTextUI;
@@ -44,7 +47,9 @@ public class GameManager : MonoBehaviour
         UpdateUI();
         conveyorController.onFinishMoving += OnConveyorFinished;
         CombatSystem.instance.onEnemyDefeated += OnEnemyKilled;
-        LevelFinishedScreen.instance.onScreenIsFinished += OnLevelFinishedScreen_Finished;
+        CombatSystem.instance.onEnemyWon += OnEnemyWon;
+        _levelFinishedScreen.onScreenIsFinished += OnLevelFinishedScreen_Finished;
+        _combatLostScreen.onScreenIsFinished += OnCombatLostScreen_Finished;
     }
 
     private void Update()
@@ -58,7 +63,7 @@ public class GameManager : MonoBehaviour
         if (args.levelFinished)
         {
             _gameState = GameState.WaitingForConveyor;
-            LevelFinishedScreen.instance.Show();
+            _levelFinishedScreen.Show("Day " + (LevelManager.instance.currentLevel + 1));
         }
         else if (args.item.TryGetComponent(out ItemEquipable equipBeh))
         {
@@ -78,18 +83,53 @@ public class GameManager : MonoBehaviour
         UpdateUI();
     }
 
+    private void OnEnemyWon(object sender, EventArgs args)
+    {
+        _playerCoins = 0;
+        _gameState = GameState.WaitingForConveyor;
+        //_combatLostScreen.Show("Enemy Won");
+        var screenTitle = "You were Defeated!";
+        var screenDescription = "";
+        if (PlayerInventory.instance.CombatCardsCount <= 0)
+        {
+            screenDescription = "You had no equipment!\n...and, monster took all your money";
+        }
+        if (LevelManager.instance.levelIsTutorial)
+        {
+            screenTitle = "Oops!";
+            screenDescription = "Don't worry, this is not your fault\nYou had no equipment!\n...also, monster took all your money";
+        }
+        _combatLostScreen.Show(screenTitle, screenDescription);
+
+        UpdateUI();
+    }
+
     private void OnLevelFinishedScreen_Finished(object sender, EventArgs args)
     {
         LevelManager.instance.MoveToNextLevel();
         conveyorController.ResetMe();
     }
 
+    private void OnCombatLostScreen_Finished(object sender, EventArgs args)
+    {
+        _levelFinishedScreen.Show("Day " + (LevelManager.instance.currentLevel + 1));
+    }
+
     public void UI_ApproveCurrentItem()
     {
         if (!inputIsBlocked)
         {
+            var spoilTarget = LevelManager.instance.currentSpoilTarget;
             var currItem = conveyorController.PeekCurrentItem().GetComponent<ConveyorItem>();
-            _playerCoins += LevelManager.instance.currentSpoilTarget != -1 && currItem.spoilLevel > LevelManager.instance.currentSpoilTarget ? 0 : currItem.price;
+            var reward = spoilTarget != -1 && currItem.spoilLevel > spoilTarget 
+                ? 0 
+                : currItem.price;
+            if (currItem.gameObject.TryGetComponent(out ItemEquipable equip))
+            {
+                reward = currItem.price / 2;
+            }
+
+            _playerCoins += reward;
             _gameState = GameState.WaitingForConveyor;
             conveyorController.ResumeConveyor();
             UpdateUI();
@@ -100,8 +140,11 @@ public class GameManager : MonoBehaviour
     {
         if (!inputIsBlocked)
         {
+            var spoilTarget = LevelManager.instance.currentSpoilTarget;
             var currItem = conveyorController.PeekCurrentItem().GetComponent<ConveyorItem>();
-            _playerCoins += LevelManager.instance.currentSpoilTarget != -1 && currItem.spoilLevel > LevelManager.instance.currentSpoilTarget ? currItem.price : 0;
+            _playerCoins += spoilTarget != -1 && currItem.spoilLevel > spoilTarget 
+                ? currItem.price 
+                : 0;
             _gameState = GameState.WaitingForConveyor;
             conveyorController.ResumeConveyor();
             UpdateUI();
@@ -166,14 +209,14 @@ public class GameManager : MonoBehaviour
                 break;
             case GameState.ItemIsGrabbable:
                 _approveBttn.SetActive(true);
-                _declineBttn.SetActive(true);
+                _declineBttn.SetActive(false);
                 _grabBttn   .SetActive(true);
                 _fightBttn  .SetActive(false);
                 _coinsContainerUI.gameObject.SetActive(true);
                 break; 
             case GameState.ItemIsEnemy:
                 _approveBttn.SetActive(false);
-                _declineBttn.SetActive(true);
+                _declineBttn.SetActive(false);
                 _grabBttn   .SetActive(false);
                 _fightBttn  .SetActive(true);
                 _coinsContainerUI.gameObject.SetActive(true);

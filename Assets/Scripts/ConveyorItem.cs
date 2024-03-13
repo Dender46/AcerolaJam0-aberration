@@ -46,18 +46,16 @@ public class ConveyorItem : MonoBehaviour
 
             if (LevelManager.instance.currentSpoilTarget == -1)
             {
-                Debug.Log("LevelManager.instance.currentSpoilTarget == -1");
                 _spoilIcon.SetActive(false);
                 _spoilLevelTextUI.gameObject.SetActive(false);
                 _canvasUI.sizeDelta = new Vector2(_canvasUI.sizeDelta.x, _canvasUIMin);
             }
             else
             {
-                Debug.Log("LevelManager.instance.currentSpoilTarget == " + LevelManager.instance.currentSpoilTarget);
                 spoilLevel = Random.Range(0, 101);
                 _spoilLevelTextUI.text = spoilLevel + "%";
                 _canvasUI.sizeDelta = new Vector2(_canvasUI.sizeDelta.x, _canvasUIMax);
-                if (spoilLevel > 40.0f)
+                if (spoilLevel > 45.0f)
                 {
                     _spoiledEffectRef.SetActive(true);
                     _spoiledParticlesRef.Play();
