@@ -147,8 +147,8 @@ public class CombatSystem : MonoBehaviour
     private void UpdatePlayerAndEnemyUI()
     {
         _enemyNameTextUI.text = _currentEnemy.enemyName;
-        _enemyHPTextUI.text = "HP: " + _currentEnemy.hp;
-        _enemyDMGTextUI.text = "DMG: " + _currentEnemy.damage;
+        _enemyHPTextUI.text = _currentEnemy.hp.ToString();
+        _enemyDMGTextUI.text = _currentEnemy.damage.ToString();
 
         _playerHPTextUI.text = playerHP.ToString();
         _playerDPTextUI.text = playerDP.ToString();
