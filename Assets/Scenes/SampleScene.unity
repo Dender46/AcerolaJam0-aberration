@@ -8157,8 +8157,8 @@ MonoBehaviour:
   _taskCanvas: {fileID: 65241401}
   _taskDescription: {fileID: 1552175198}
   _levelInfos:
-  - {fileID: 4900000, guid: 4b0ef8cfc8cc01940857f11dd791f7e4, type: 3}
   - {fileID: 4900000, guid: 226fd58eb2b08074298a541f6301023c, type: 3}
+  - {fileID: 4900000, guid: 4b0ef8cfc8cc01940857f11dd791f7e4, type: 3}
   - {fileID: 4900000, guid: f48f422fe8a132e4fa8be8256471338e, type: 3}
   - {fileID: 4900000, guid: cbd216b12fea86c409b652d7c8ac54d1, type: 3}
   - {fileID: 4900000, guid: 3eb1be586b5bd5846b0ee3ba318c34e6, type: 3}

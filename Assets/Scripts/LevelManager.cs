@@ -10,7 +10,7 @@ public class LevelManager : MonoBehaviour
     [SerializeField] private TMP_Text _taskDescription;
     [SerializeField] private List<TextAsset> _levelInfos = new();
 
-    private int _currentSpoilTarget;
+    private int _currentSpoilTarget = -1;
     private int _currentLevel = -1;
     private int _currentItemIndex = 0;
     private LevelInfo _currentLevelInfo;
@@ -64,6 +64,7 @@ public class LevelManager : MonoBehaviour
         if (_currentLevelInfo.spoilRangeTarget.Count == 0)
         {
             _taskCanvas.gameObject.SetActive(false);
+            _currentSpoilTarget = -1;
         }
         else
         {
@@ -72,6 +73,13 @@ public class LevelManager : MonoBehaviour
             var textWithSpoilTarget = _taskDescription.text.Replace("<SPOIL_TARGET>", _currentSpoilTarget.ToString());
             _taskDescription.text = textWithSpoilTarget;
         }
+    }
+
+    public int GetPossibleFixedPrice()
+    {
+        return _currentLevelInfo.pricesRange.Count != 0
+            ? _currentLevelInfo.pricesRange[Random.Range(0, _currentLevelInfo.pricesRange.Count)]
+            : -1;
     }
 
     public GameObject GetNextItem()
