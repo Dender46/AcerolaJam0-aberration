@@ -1,0 +1,37 @@
+{
+    "DEBUG_ENUM_TYPE_REFERENCE": [
+        {"0": "Regular"},
+        {"1": "Damage"},
+        {"2": "Heal"},
+        {"3": "Defence"},
+        {"4": "Enemy"}
+    ],
+    "spoiledChance": 0.5,
+    "items": [
+        0,0,0,0,
+        2,2,0,1,
+        0,0,1,0,
+        0,1,0,4],
+    "regularItems": [
+        "PBrocolli",
+        "PLoaf",
+        "PPineapple",
+        "PPotStew",
+        "PTaco",
+        "PPumpkin",
+        "PTurkey",
+        "PWholeHam"
+    ],
+    "damageItems": [
+        "PCookingKnife"
+    ],
+    "healItems": [
+        "PApple"
+    ],
+    "defenceItems": [
+        "PBurger"
+    ],
+    "enemyItems": [
+        "PTurkey"
+    ]
+}

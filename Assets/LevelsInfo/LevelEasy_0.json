@@ -4,17 +4,17 @@
         {"1": "Damage"},
         {"2": "Heal"},
         {"3": "Defence"},
-        {"4": "Enemy"},
-        {"5": "Spoiled?"}
+        {"4": "Enemy"}
     ],
-    "spoiledChance": 0.5,
+    "spoiledChance": 0.4,
     "items": [0,0,0,0,1,0,0,1,4],
-    "items1":  [1,1,4],
-    "items2":  [0,1,2,3,4],
     "regularItems": [
         "PBrocolli",
         "PLoaf",
-        "PPineapple"
+        "PPineapple",
+        "PPotstew",
+        "PPumpkin", 
+        "PTaco"
     ],
     "damageItems": [
         "PCookingKnife"

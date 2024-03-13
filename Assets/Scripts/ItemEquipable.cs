@@ -21,7 +21,6 @@ public class ItemEquipable : MonoBehaviour
 
         [Space(5)]
         public int damage = 10;
-        public int defence = 2;
 
         [Space(5)]
         public int restoreHp = 2;
@@ -29,7 +28,7 @@ public class ItemEquipable : MonoBehaviour
 
         [Space(5)]
         public int cost = 2;
-        public int haveUses = 2;
+        //public int haveUses = 2;
     }
 
     public EquipableInfo info;

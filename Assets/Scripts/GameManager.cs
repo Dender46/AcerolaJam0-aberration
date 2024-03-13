@@ -172,8 +172,8 @@ public class GameManager : MonoBehaviour
                 _coinsContainerUI.gameObject.SetActive(true);
                 break; 
             case GameState.ItemIsEnemy:
-                _approveBttn.SetActive(true);
-                _declineBttn.SetActive(false);
+                _approveBttn.SetActive(false);
+                _declineBttn.SetActive(true);
                 _grabBttn   .SetActive(false);
                 _fightBttn  .SetActive(true);
                 _coinsContainerUI.gameObject.SetActive(true);

@@ -110,11 +110,9 @@ MonoBehaviour:
     type: 2
     preview: {fileID: 21300000, guid: 3f069ca07a44f4441a98b6302f3fa62e, type: 3}
     damage: 5
-    defence: 2
     restoreHp: 0
-    restoreDp: 2
+    restoreDp: 0
     cost: 30
-    haveUses: 2
   itemPreview: {fileID: 21300000, guid: 3f069ca07a44f4441a98b6302f3fa62e, type: 3}
 --- !u!4 &7218908446476984427 stripped
 Transform:
