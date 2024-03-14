@@ -21,6 +21,8 @@ public class CombatSystem : MonoBehaviour
     public int playerDP = 0;
     [Header("CombatParams")]
     public float attackWaitTime = 1.0f;
+    [Header("Audio")]
+    [SerializeField] private AudioSource _musicSource;
 
     private Animator _cameraAnimator;
     private Animator _directionalLightsAnimator;
@@ -44,6 +46,7 @@ public class CombatSystem : MonoBehaviour
 
     public void StartTheFight(GameObject enemyGO)
     {
+        _musicSource.pitch = 0.9f;
         _currentEnemy = enemyGO.GetComponent<EnemyBehaviour>();
         EnableUI();
         UpdatePlayerAndEnemyUI();
@@ -62,6 +65,7 @@ public class CombatSystem : MonoBehaviour
 
     public void EndTheFight(bool isWin)
     {
+        _musicSource.pitch = 1.0f;
         _currentEnemy.OnDefeated();
         DisableUI();
         PlayerInventory.instance.TurnCardsToItems();

@@ -8,15 +8,39 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 260820237383330385, guid: cbf58e0749ed40e43a80b4ca5ef7609d, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 334788895558486870, guid: cbf58e0749ed40e43a80b4ca5ef7609d, type: 3}
       propertyPath: price
       value: 9999
+      objectReference: {fileID: 0}
+    - target: {fileID: 3315022919686675893, guid: cbf58e0749ed40e43a80b4ca5ef7609d, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 5563129904568940201, guid: cbf58e0749ed40e43a80b4ca5ef7609d, type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 5574089062023156028, guid: cbf58e0749ed40e43a80b4ca5ef7609d, type: 3}
       propertyPath: m_Name
       value: PApple
       objectReference: {fileID: 0}
     - target: {fileID: 5574089062023156028, guid: cbf58e0749ed40e43a80b4ca5ef7609d, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 5712623952341882761, guid: cbf58e0749ed40e43a80b4ca5ef7609d, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 6129578202975683070, guid: cbf58e0749ed40e43a80b4ca5ef7609d, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 6947043908100086961, guid: cbf58e0749ed40e43a80b4ca5ef7609d, type: 3}
       propertyPath: m_Layer
       value: 7
       objectReference: {fileID: 0}
@@ -84,6 +108,22 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 0.37
       objectReference: {fileID: 0}
+    - target: {fileID: 8056478564741515856, guid: cbf58e0749ed40e43a80b4ca5ef7609d, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 8064307800329668537, guid: cbf58e0749ed40e43a80b4ca5ef7609d, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 8200033238668849040, guid: cbf58e0749ed40e43a80b4ca5ef7609d, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 8491039772856225373, guid: cbf58e0749ed40e43a80b4ca5ef7609d, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -114,9 +154,7 @@ MonoBehaviour:
     type: 1
     preview: {fileID: 21300000, guid: 7280e59092f7642409cea479cb453bfc, type: 3}
     damage: 0
-    defence: 0
     restoreHp: 5
     restoreDp: 0
     cost: 15
-    haveUses: 2
   itemPreview: {fileID: 21300000, guid: 7280e59092f7642409cea479cb453bfc, type: 3}

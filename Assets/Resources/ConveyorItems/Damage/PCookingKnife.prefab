@@ -8,15 +8,39 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 260820237383330385, guid: cbf58e0749ed40e43a80b4ca5ef7609d, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 334788895558486870, guid: cbf58e0749ed40e43a80b4ca5ef7609d, type: 3}
       propertyPath: price
       value: 9999
+      objectReference: {fileID: 0}
+    - target: {fileID: 3315022919686675893, guid: cbf58e0749ed40e43a80b4ca5ef7609d, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 5563129904568940201, guid: cbf58e0749ed40e43a80b4ca5ef7609d, type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 5574089062023156028, guid: cbf58e0749ed40e43a80b4ca5ef7609d, type: 3}
       propertyPath: m_Name
       value: PCookingKnife
       objectReference: {fileID: 0}
     - target: {fileID: 5574089062023156028, guid: cbf58e0749ed40e43a80b4ca5ef7609d, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 5712623952341882761, guid: cbf58e0749ed40e43a80b4ca5ef7609d, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 6129578202975683070, guid: cbf58e0749ed40e43a80b4ca5ef7609d, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 6947043908100086961, guid: cbf58e0749ed40e43a80b4ca5ef7609d, type: 3}
       propertyPath: m_Layer
       value: 7
       objectReference: {fileID: 0}
@@ -71,6 +95,18 @@ PrefabInstance:
     - target: {fileID: 7755733650188300328, guid: cbf58e0749ed40e43a80b4ca5ef7609d, type: 3}
       propertyPath: m_LocalScale.z
       value: 0.34
+      objectReference: {fileID: 0}
+    - target: {fileID: 8064307800329668537, guid: cbf58e0749ed40e43a80b4ca5ef7609d, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 8200033238668849040, guid: cbf58e0749ed40e43a80b4ca5ef7609d, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 8491039772856225373, guid: cbf58e0749ed40e43a80b4ca5ef7609d, type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 8595024941622687847, guid: cbf58e0749ed40e43a80b4ca5ef7609d, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -170,6 +206,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 34ed661578bf1c04595257dafdc8ba49, type: 3}
       propertyPath: m_Name
       value: cookingKnife
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 34ed661578bf1c04595257dafdc8ba49, type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

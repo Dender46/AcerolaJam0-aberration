@@ -12,6 +12,7 @@ public class CombatCardController : MonoBehaviour, IPointerClickHandler
     [SerializeField] private GameObject _cardStatPrefab;
 
     [Header("References")]
+    [SerializeField] private AudioClip _paperClickAudio;
     [SerializeField] private Sprite _damageIcon;
     [SerializeField] private Sprite _healIcon;
     [SerializeField] private Sprite _defenceIcon;
@@ -54,6 +55,7 @@ public class CombatCardController : MonoBehaviour, IPointerClickHandler
     {
         if (CombatSystem.instance.isPlayerTurn)
         {
+            GameManager.instance.audioSource.PlayOneShot(_paperClickAudio);
             wasUsed = true;
             PlayerInventory.instance.OnCardClick(this);
             CombatSystem.instance.PlayerMove(assignedEquipment);

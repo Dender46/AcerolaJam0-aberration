@@ -6,12 +6,14 @@ public class ConveyorController : MonoBehaviour
     [SerializeField] private LevelManager _levelManager;
     [SerializeField] private float _conveyorTime = 5.0f;
     [SerializeField] private AnimationCurve _animationCurve;
+    [SerializeField] private AnimationCurve _audioLevelCurve;
     [SerializeField] private Vector3 _center;
     [SerializeField] private Vector3 _spawnPoint;
     [SerializeField] private Vector3 _despawnPoint;
     [SerializeField] private Transform _containerForSpawnedObjects;
 
     private Transform[] _objectsOnTheConveyor = new Transform[3];
+    private AudioSource _audioSource;
 
     private float _timer = 0.0f;
     private bool _isMoving = false;
@@ -23,6 +25,13 @@ public class ConveyorController : MonoBehaviour
     }
 
     public event EventHandler<FinishedMovingEventArgs> onFinishMoving;
+
+    private void Start()
+    {
+        _audioSource = GetComponent<AudioSource>();
+        _audioSource.Play();
+        _audioSource.volume = 0.0f;
+    }
 
     public void ResetMe()
     {
@@ -47,6 +56,7 @@ public class ConveyorController : MonoBehaviour
                 return;
             }
             
+            _audioSource.volume = Mathf.Lerp(0.0f, 0.14f, _audioLevelCurve.Evaluate(lerpT));
             if (_objectsOnTheConveyor[0]) LerpObjectToDest(_objectsOnTheConveyor[0], _spawnPoint, _center, lerpT);
             if (_objectsOnTheConveyor[1]) LerpObjectToDest(_objectsOnTheConveyor[1], _center, _despawnPoint, lerpT);
         }
@@ -60,6 +70,7 @@ public class ConveyorController : MonoBehaviour
     public void ResumeConveyor()
     {
         _isMoving = true;
+        _audioSource.UnPause();
     }
 
     public GameObject PeekCurrentItem()
@@ -74,6 +85,8 @@ public class ConveyorController : MonoBehaviour
 
     private void FinishProgression()
     {
+        _audioSource.Pause();
+
         _timer = 0.0f;
         _isMoving = false;
 

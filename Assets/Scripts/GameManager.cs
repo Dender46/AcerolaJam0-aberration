@@ -1,5 +1,4 @@
 using System;
-using System.Collections;
 using TMPro;
 using UnityEngine;
 
@@ -17,6 +16,8 @@ public class GameManager : MonoBehaviour
     [Header("Economy")]
     [SerializeField] private RectTransform _coinsContainerUI;
     [SerializeField] private TMP_Text _coinsTextUI;
+    [Header("Audio")]
+    [SerializeField] private AudioClip _bttnClickAudio;
     public ConveyorController conveyorController;
 
     public bool inputIsBlocked { private set; get; }
@@ -37,9 +38,13 @@ public class GameManager : MonoBehaviour
     private int _playerCoins = 0;
 
     public static GameManager instance { private set; get; }
+    
+    
+    public AudioSource audioSource;
 
     private void Awake()
     {
+        audioSource = GetComponent<AudioSource>();
         _enemyItemLayer = LayerMask.NameToLayer("EnemyItem");
         instance = this;
     }
@@ -133,6 +138,8 @@ public class GameManager : MonoBehaviour
     {
         if (!inputIsBlocked)
         {
+            audioSource.PlayOneShot(_bttnClickAudio);
+
             var currItem = conveyorController.PeekCurrentItem().GetComponent<ConveyorItem>();
             var meetsObjectives = LevelManager.instance.ItemMeetsObjectives(true, currItem);
             var reward = meetsObjectives ? currItem.price : 0;
@@ -152,6 +159,8 @@ public class GameManager : MonoBehaviour
     {
         if (!inputIsBlocked)
         {
+            audioSource.PlayOneShot(_bttnClickAudio);
+
             var currItem = conveyorController.PeekCurrentItem().GetComponent<ConveyorItem>();
             var meetsObjectives = LevelManager.instance.ItemMeetsObjectives(false, currItem);
             _playerCoins += meetsObjectives ? currItem.price : 0;
@@ -165,6 +174,8 @@ public class GameManager : MonoBehaviour
     {
         if (!inputIsBlocked)
         {
+            audioSource.PlayOneShot(_bttnClickAudio);
+
             var grabbedItem = conveyorController.PeekCurrentItem();
             var equipmentInfo = grabbedItem.GetComponent<ItemEquipable>().info;
             if (equipmentInfo.cost == 0 || equipmentInfo.cost <= _playerCoins)
@@ -187,6 +198,8 @@ public class GameManager : MonoBehaviour
     {
         if (!inputIsBlocked)
         {
+            audioSource.PlayOneShot(_bttnClickAudio);
+
             _gameState = GameState.FightingEnemy;
             var grabbedItem = conveyorController.PeekCurrentItem();
             var spawnedEnemy = Instantiate(grabbedItem.GetComponent<ItemEnemy>().enemyPrefab);
