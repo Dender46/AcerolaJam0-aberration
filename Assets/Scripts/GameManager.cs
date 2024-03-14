@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using TMPro;
 using UnityEngine;
 
@@ -12,6 +13,7 @@ public class GameManager : MonoBehaviour
     [Header("Screens")]
     [SerializeField] private LevelFinishedScreen _levelFinishedScreen;
     [SerializeField] private LevelFinishedScreen _combatLostScreen;
+    [SerializeField] private TaskScreen _taskScreen;
     [Header("Economy")]
     [SerializeField] private RectTransform _coinsContainerUI;
     [SerializeField] private TMP_Text _coinsTextUI;
@@ -50,6 +52,13 @@ public class GameManager : MonoBehaviour
         CombatSystem.instance.onEnemyWon += OnEnemyWon;
         _levelFinishedScreen.onScreenIsFinished += OnLevelFinishedScreen_Finished;
         _combatLostScreen.onScreenIsFinished += OnCombatLostScreen_Finished;
+        _taskScreen.onScreenIsFinished += OnTaskScreen_Finished;
+        Invoke(nameof(StartTheGame), 0.5f);
+    }
+
+    private void StartTheGame()
+    {
+        _taskScreen.Show();
     }
 
     private void Update()
@@ -107,12 +116,17 @@ public class GameManager : MonoBehaviour
     private void OnLevelFinishedScreen_Finished(object sender, EventArgs args)
     {
         LevelManager.instance.MoveToNextLevel();
-        conveyorController.ResetMe();
+        _taskScreen.Show();
     }
 
     private void OnCombatLostScreen_Finished(object sender, EventArgs args)
     {
         _levelFinishedScreen.Show("Day " + (LevelManager.instance.currentLevel + 1));
+    }
+
+    private void OnTaskScreen_Finished(object sender, EventArgs args)
+    {
+        conveyorController.ResetMe();
     }
 
     public void UI_ApproveCurrentItem()

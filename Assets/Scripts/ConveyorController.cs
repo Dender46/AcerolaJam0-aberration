@@ -24,11 +24,6 @@ public class ConveyorController : MonoBehaviour
 
     public event EventHandler<FinishedMovingEventArgs> onFinishMoving;
 
-    private void Start()
-    {
-        ResetMe();
-    }
-
     public void ResetMe()
     {
         var firstObject = Instantiate(_levelManager.GetNextItem()).transform;

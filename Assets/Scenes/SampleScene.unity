@@ -4764,7 +4764,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _dayTextUI: {fileID: 2015748351}
   _descriptionTextUI: {fileID: 1364316821}
-  _speed: 0.3
+  _speed: 0.6
 --- !u!225 &1237353990
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -5503,7 +5503,7 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 847435961}
   - {fileID: 1552175197}
@@ -5511,7 +5511,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 10, y: -10}
+  m_AnchoredPosition: {x: 9.999939, y: -10.000015}
   m_SizeDelta: {x: 180, y: 70}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1532480261
@@ -5564,9 +5564,66 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67b77f59c8b988d4c9ba534243ca992f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _showAnimationCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 0.3
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.5
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.7
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  _finalScale: {x: 1.8, y: 1.8}
+  _finalAnchorMin: {x: 0.5, y: 0.5}
+  _finalAnchorMax: {x: 0.5, y: 0.5}
+  _finalPivot: {x: 0.5, y: 0.5}
+  _time: 9
   _description: {fileID: 1552175197}
   _titleHeight: 30
   _paddingDown: 5
+  _isAnimating: 0
 --- !u!1 &1552175196
 GameObject:
   m_ObjectHideFlags: 0
@@ -7654,7 +7711,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 6.600006, y: 176.6}
+  m_AnchoredPosition: {x: 6.6000977, y: 176.60004}
   m_SizeDelta: {x: 70, y: 35}
   m_Pivot: {x: 0, y: 0}
 --- !u!1 &1954848341
@@ -8458,7 +8515,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8318521124957137344, guid: acf005f7ef85d374ca71e5f47b588500, type: 3}
       propertyPath: _conveyorTime
-      value: 1
+      value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 8318521124957137344, guid: acf005f7ef85d374ca71e5f47b588500, type: 3}
       propertyPath: _levelManager
@@ -8703,6 +8760,10 @@ PrefabInstance:
       propertyPath: _fightBttn
       value: 
       objectReference: {fileID: 1229646194}
+    - target: {fileID: 5474771637980431987, guid: fff19cc3d1293bb40b0ce2550d28f16e, type: 3}
+      propertyPath: _taskScreen
+      value: 
+      objectReference: {fileID: 1532480263}
     - target: {fileID: 5474771637980431987, guid: fff19cc3d1293bb40b0ce2550d28f16e, type: 3}
       propertyPath: _approveBttn
       value: 
