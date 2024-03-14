@@ -99,7 +99,7 @@ public class GameManager : MonoBehaviour
 
     private void OnEnemyWon(object sender, EventArgs args)
     {
-        _playerCoins /= 2;
+        _playerCoins /= 4;
         _gameState = GameState.WaitingForConveyor;
         //_combatLostScreen.Show("Enemy Won");
         var screenTitle = "You were Defeated!";
