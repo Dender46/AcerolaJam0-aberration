@@ -134,7 +134,7 @@ MonoBehaviour:
   enemyName: Silly Turkey
   maxHp: 8
   hp: 0
-  damage: 1
+  damage: 3
 --- !u!114 &-5617191639879793920
 MonoBehaviour:
   m_ObjectHideFlags: 0

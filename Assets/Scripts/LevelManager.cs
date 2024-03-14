@@ -7,6 +7,7 @@ using Random = UnityEngine.Random;
 public class LevelManager : MonoBehaviour
 {
     [SerializeField] private RectTransform _taskCanvas;
+    [SerializeField] private TMP_Text _taskTitle;
     [SerializeField] private TMP_Text _taskDescription;
     [SerializeField] private TextAsset _allObjectivesJson;
     [SerializeField] private List<TextAsset> _levelInfos = new();
@@ -156,6 +157,8 @@ public class LevelManager : MonoBehaviour
                 allObjectivesText += "\n";
         }
 
+        // Update task screen
+        _taskTitle.text = "Day " + (_currentLevel+1) + " Objective:";
         _taskDescription.text = allObjectivesText;
     }
 
