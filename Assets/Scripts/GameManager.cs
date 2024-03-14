@@ -119,11 +119,9 @@ public class GameManager : MonoBehaviour
     {
         if (!inputIsBlocked)
         {
-            var spoilTarget = LevelManager.instance.currentSpoilTarget;
             var currItem = conveyorController.PeekCurrentItem().GetComponent<ConveyorItem>();
-            var reward = spoilTarget != -1 && currItem.spoilLevel > spoilTarget 
-                ? 0 
-                : currItem.price;
+            var meetsObjectives = LevelManager.instance.ItemMeetsObjectives(true, currItem);
+            var reward = meetsObjectives ? currItem.price : 0;
             if (currItem.gameObject.TryGetComponent(out ItemEquipable equip))
             {
                 reward = currItem.price / 2;
@@ -140,11 +138,9 @@ public class GameManager : MonoBehaviour
     {
         if (!inputIsBlocked)
         {
-            var spoilTarget = LevelManager.instance.currentSpoilTarget;
             var currItem = conveyorController.PeekCurrentItem().GetComponent<ConveyorItem>();
-            _playerCoins += spoilTarget != -1 && currItem.spoilLevel > spoilTarget 
-                ? currItem.price 
-                : 0;
+            var meetsObjectives = LevelManager.instance.ItemMeetsObjectives(false, currItem);
+            _playerCoins += meetsObjectives ? currItem.price : 0;
             _gameState = GameState.WaitingForConveyor;
             conveyorController.ResumeConveyor();
             UpdateUI();
@@ -202,7 +198,10 @@ public class GameManager : MonoBehaviour
                 break;
             case GameState.ItemIsRegular:
                 _approveBttn.SetActive(true);
-                _declineBttn.SetActive(true);
+                if (LevelManager.instance.removeDeclineButton) // THIS IS FOR FIRST LEVEL
+                    _declineBttn.SetActive(false);
+                else    
+                    _declineBttn.SetActive(true);
                 _grabBttn   .SetActive(false);
                 _fightBttn  .SetActive(false);
                 _coinsContainerUI.gameObject.SetActive(true);

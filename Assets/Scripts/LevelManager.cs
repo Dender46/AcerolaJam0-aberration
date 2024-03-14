@@ -1,18 +1,51 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UIElements;
+using static LevelManager;
 using Random = UnityEngine.Random;
 
 public class LevelManager : MonoBehaviour
 {
     [SerializeField] private RectTransform _taskCanvas;
     [SerializeField] private TMP_Text _taskDescription;
+    [SerializeField] private TextAsset _allObjectivesJson;
     [SerializeField] private List<TextAsset> _levelInfos = new();
 
     private string _taskDescriptionStr = "Decline items which are spoiled <color=#0083BB>beyond <SPOIL_TARGET>%</color>\r\n";
 
-    private int _currentSpoilTarget = -1;
+    [Serializable]
+    public struct SerializedObjective
+    {
+        [Serializable]
+        public struct Info
+        {
+            public int id;
+            public string text;
+        }
+
+        public List<Info> info;
+    }
+
+    public class Objective
+    {
+        [Serializable]
+        public enum Type { ApproveAll, SpoilTarget, SpecificItems }
+        public Type type;
+
+        public bool isApprove = true;
+        public int spoilTarget = -1;
+
+        public List<string> specificItems = new();
+    }
+
+    private SerializedObjective _serializedObjectives;
+    private List<Objective> _objectives = new();
+
+
     private int _currentLevel = -1;
     private int _currentItemIndex = 0;
     private LevelInfo _currentLevelInfo;
@@ -27,15 +60,17 @@ public class LevelManager : MonoBehaviour
             Damage,
             Heal,
             Defence,
-            Enemy
+            Enemy,
         }
 
         public int isTutorial;
+        public int removeDeclineButton;
         public List<int> pricesRange;
         public List<int> spoilRangeTarget;
 
-        public float spoiledChance;
+        public List<Objective.Type> objectives;
         public List<ItemType> items;
+        public float spoiledChance;
 
         public List<string> regularItems;
         public List<string> damageItems;
@@ -44,14 +79,15 @@ public class LevelManager : MonoBehaviour
         public List<string> enemyItems;
     }
 
-    public float currentSpoilTarget => _currentSpoilTarget;
     public int currentLevel => _currentLevel;
     public bool levelIsTutorial => _currentLevelInfo.isTutorial == 1;
+    public bool removeDeclineButton => _currentLevelInfo.removeDeclineButton == 1;
 
     public static LevelManager instance { private set; get; }
 
     private void Awake()
     {
+        _serializedObjectives = JsonUtility.FromJson<SerializedObjective>(_allObjectivesJson.text);
         MoveToNextLevel();
 
         instance = this;
@@ -61,21 +97,106 @@ public class LevelManager : MonoBehaviour
     {
         _currentItemIndex = 0;
         _currentLevel++;
-        var levelInfoJson = _levelInfos[_currentLevel].ToString();
+        var levelInfoJson = _levelInfos[_currentLevel].text;
         _currentLevelInfo = JsonUtility.FromJson<LevelInfo>(levelInfoJson);
 
-        if (_currentLevelInfo.spoilRangeTarget.Count == 0)
+        // set objectives
+        _objectives.Clear();
+        var isApprove = Random.Range(0.0f, 1.0f) > 0.5f;
+        foreach (var objectiveType in _currentLevelInfo.objectives)
         {
-            _taskCanvas.gameObject.SetActive(false);
-            _currentSpoilTarget = -1;
+            var newObjective = new Objective {
+                type = objectiveType,
+                isApprove = isApprove,
+            };
+            switch (objectiveType)
+            {
+                case Objective.Type.ApproveAll:
+                    break;
+                case Objective.Type.SpoilTarget:
+                    newObjective.spoilTarget = GetRandomFromList(_currentLevelInfo.spoilRangeTarget);
+                    break;
+                case Objective.Type.SpecificItems:
+                    var randomIndices = GetRandomIndices(_currentLevelInfo.regularItems.Count);
+                    foreach (var index in randomIndices)
+                    {
+                        newObjective.specificItems.Add(_currentLevelInfo.regularItems[index]);
+                    }
+                    break;
+            }
+            _objectives.Add(newObjective);
         }
-        else
+
+        // update objective screen
+        var allObjectivesText = "";
+        var approveOrDeclineStr = isApprove ? "<color=#0fac44>Approve</color>" : "<color=#d32d2d>Decline</color>";
+        for (int i = 0; i < _objectives.Count; i++)
         {
-            _taskCanvas.gameObject.SetActive(true);
-            _currentSpoilTarget = _currentLevelInfo.spoilRangeTarget[Random.Range(0, _currentLevelInfo.spoilRangeTarget.Count)];
-            var textWithSpoilTarget = _taskDescriptionStr.Replace("<SPOIL_TARGET>", _currentSpoilTarget.ToString());
-            _taskDescription.text = textWithSpoilTarget;
+            allObjectivesText += i + 1 + ". ";
+
+            var objective = _objectives[i];
+            string description = _serializedObjectives.info[(int)objective.type].text;
+            switch (objective.type)
+            {
+                case Objective.Type.ApproveAll: break;
+                case Objective.Type.SpoilTarget:
+                    description = description.Replace("<USER_CHOICE>", approveOrDeclineStr);
+                    description = description.Replace("<SPOIL_TARGET>", objective.spoilTarget.ToString());
+                    break;
+                case Objective.Type.SpecificItems:
+                    string itemsStr = "";
+                    foreach (var item in objective.specificItems)
+                    {
+                        itemsStr += "\n • " + item[1..]; 
+                    }
+                    // BE CAREAFUL
+                    description = description.Replace("<USER_CHOICE>", _objectives.Count == 1 ? approveOrDeclineStr : "<b>AND</b>");
+                    description = description.Replace("<SPECIFIC_ITEMS>", itemsStr);
+                    break;
+            }
+
+            allObjectivesText += description;
+            if (i != _objectives.Count - 1)
+                allObjectivesText += "\n";
         }
+
+        _taskDescription.text = allObjectivesText;
+    }
+
+    public bool ItemMeetsObjectives(bool playerApproves, ConveyorItem item)
+    {
+        var shouldBees = new List<bool>();
+        foreach (var objective in _objectives)
+        {
+            var shouldBe = false;
+            switch (objective.type)
+            {
+                case Objective.Type.ApproveAll: 
+                    shouldBe = true;
+                    break;
+                case Objective.Type.SpoilTarget:
+                    var isSpoiled = item.spoilLevel >= objective.spoilTarget;
+                    shouldBe = objective.isApprove ? isSpoiled : !isSpoiled;
+                    break;
+                case Objective.Type.SpecificItems:
+                    var isInAList = false;
+                    foreach (var itemName in objective.specificItems)
+                    {
+                        if (item.gameObject.name.Contains(itemName))
+                        {
+                            isInAList = true;
+                            break;
+                        }
+                    }
+                    shouldBe = objective.isApprove ? isInAList : !isInAList;
+                    break;
+            }
+            shouldBees.Add(shouldBe);
+        }
+
+        // two mission results must match
+        var finalResultShouldBe = shouldBees.TrueForAll((val) => val == true);
+        return playerApproves == finalResultShouldBe;
     }
 
     public int GetPossibleFixedPrice()
@@ -122,6 +243,28 @@ public class LevelManager : MonoBehaviour
         _currentItemIndex++;
 
         return result;
+    }
+
+    private List<int> GetRandomIndices(int listCount)
+    {
+        var availableIndices = new List<int>();
+        for (int i = 0; i < listCount; i++)
+            availableIndices.Add(i);
+
+        var resultIndices = new List<int>();
+        var resultCount = listCount / 2;
+        for (int i = 0; i < resultCount; i++)
+        {
+            var index = Random.Range(0, availableIndices.Count);
+            resultIndices.Add(availableIndices[index]);
+            availableIndices.RemoveAt(index);
+        }
+        return availableIndices;
+    }
+
+    private int GetRandomFromList(List<int> list)
+    {
+        return list[Random.Range(0, list.Count)];
     }
 
     private string GetRandomFromList(List<string> list)

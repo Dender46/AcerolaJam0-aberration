@@ -1,0 +1,16 @@
+{
+    "info":[
+        {
+            "id": 0,
+            "text": "Approve <b>ALL</b> items"
+        },
+        {
+            "id": 1,
+            "text": "<USER_CHOICE> if the item is spoiled <color=#0083BB>more than <SPOIL_TARGET>%</color>"
+        },
+        {
+            "id": 2,
+            "text": "<USER_CHOICE> if the item is:<SPECIFIC_ITEMS>"
+        }
+    ]
+}

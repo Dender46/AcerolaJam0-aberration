@@ -7,10 +7,11 @@
         {"4": "Enemy"}
     ],
 
-    "spoilRangeTarget": [25,30,35,40],
+    "spoilRangeTarget": [35,40,55,60],
 
+    "objectives": [1],
+    "items": [0,0,0,0,1,0,0,0,1,0,4],
     "spoiledChance": 0.4,
-    "items": [0,0,0,0,1,0,0,1,4],
     "regularItems": [
         "PBrocolli",
         "PLoaf",

@@ -44,7 +44,7 @@ public class ConveyorItem : MonoBehaviour
             price = fixedPrice == -1 ? price : fixedPrice;
             _costTextUI.text = price.ToString();
 
-            if (LevelManager.instance.currentSpoilTarget == -1)
+            if (LevelManager.instance.removeDeclineButton) // kostyl'
             {
                 _spoilIcon.SetActive(false);
                 _spoilLevelTextUI.gameObject.SetActive(false);
@@ -55,7 +55,7 @@ public class ConveyorItem : MonoBehaviour
                 spoilLevel = Random.Range(0, 101);
                 _spoilLevelTextUI.text = spoilLevel + "%";
                 _canvasUI.sizeDelta = new Vector2(_canvasUI.sizeDelta.x, _canvasUIMax);
-                if (spoilLevel > 45.0f)
+                if (spoilLevel > 40.0f)
                 {
                     _spoiledEffectRef.SetActive(true);
                     _spoiledParticlesRef.Play();

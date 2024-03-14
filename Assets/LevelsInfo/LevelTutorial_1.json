@@ -9,9 +9,10 @@
     
     "isTutorial": 1,
     "pricesRange": [1, 3],
-    "spoilRangeTarget": [25,30,35,40],
+    "spoilRangeTarget": [35,40,55,60],
 
-    "items": [0,0,0,0,4],
+    "objectives": [1],
+    "items": [0,0,0,0,0,0,0,4],
     "spoiledChance": 0.6,
     "regularItems": [
         "PBrocolli",
