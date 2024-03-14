@@ -16,6 +16,7 @@ public class CombatSystem : MonoBehaviour
     [SerializeField] private GameObject _inventoryUI;
     [SerializeField] private GameObject _playerCombatStatsUI;
     [Header("PlayerStats")]
+    private int _playerMaxHP;
     public int playerHP = 10;
     public int playerDP = 0;
     [Header("CombatParams")]
@@ -34,6 +35,7 @@ public class CombatSystem : MonoBehaviour
 
     private void Awake()
     {
+        _playerMaxHP = playerHP;
         _cameraAnimator = Camera.main.GetComponent<Animator>();
         _directionalLightsAnimator = GameObject.Find("Directional Light").GetComponent<Animator>();
         DisableUI();
@@ -83,6 +85,7 @@ public class CombatSystem : MonoBehaviour
         {
             if (equipableInfo.type.HasFlag(EquipableInfo.Type.Heal)) {
                 playerHP += equipableInfo.restoreHp;
+                playerHP = Math.Clamp(playerHP, 0, _playerMaxHP);
             }
             if (equipableInfo.type.HasFlag(EquipableInfo.Type.Defence)) {
                 playerDP += equipableInfo.restoreDp;

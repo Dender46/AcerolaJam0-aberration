@@ -1,11 +1,7 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.UIElements;
-using static LevelManager;
 using Random = UnityEngine.Random;
 
 public class LevelManager : MonoBehaviour
@@ -14,8 +10,6 @@ public class LevelManager : MonoBehaviour
     [SerializeField] private TMP_Text _taskDescription;
     [SerializeField] private TextAsset _allObjectivesJson;
     [SerializeField] private List<TextAsset> _levelInfos = new();
-
-    private string _taskDescriptionStr = "Decline items which are spoiled <color=#0083BB>beyond <SPOIL_TARGET>%</color>\r\n";
 
     [Serializable]
     public struct SerializedObjective
@@ -97,7 +91,9 @@ public class LevelManager : MonoBehaviour
     {
         _currentItemIndex = 0;
         _currentLevel++;
-        var levelInfoJson = _levelInfos[_currentLevel].text;
+        var levelInfoJson = _currentLevel < _levelInfos.Count 
+            ? _levelInfos[_currentLevel].text 
+            : _levelInfos[_levelInfos.Count-1].text;
         _currentLevelInfo = JsonUtility.FromJson<LevelInfo>(levelInfoJson);
 
         // set objectives

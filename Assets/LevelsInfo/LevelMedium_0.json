@@ -10,7 +10,7 @@
     "spoilRangeTarget": [35,40,55,60],
 
     "objectives": [2],
-    "items": [0,0,2,1,0,0,2,1,0,4],
+    "items": [0,0,0,0,2,0,0,1,4,1,0,3,0,1,0,4],
     "spoiledChance": 0.5,
     "regularItems": [
         "PBrocolli",
@@ -21,13 +21,15 @@
         "PTaco"
     ],
     "damageItems": [
-        "PCookingKnife"
+        "PCookingKnife",
+        "PFryingPan"
     ],
     "healItems": [
         "PApple"
     ],
     "defenceItems": [
-        "PBurger"
+        "PBurger",
+        "PSub"
     ],
     "enemyItems": [
         "PTurkey"

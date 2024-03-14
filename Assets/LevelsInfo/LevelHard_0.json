@@ -11,10 +11,11 @@
 
     "objectives": [1, 2],
     "items": [
-        0,0,0,0,0,0,
-        2,0,0,0,0,1,
-        4,0,1,0,0,3,
-        0,0,1,0,0,4
+        0,3,0,0,0,
+        2,0,2,1,2,
+        0,0,1,0,1,
+        0,0,3,0,3,
+        0,1,1,2,4
     ],
     "spoiledChance": 0.5,
     "regularItems": [
@@ -22,22 +23,24 @@
         "PLoaf",
         "PPineapple",
         "PPotstew",
-        "PTaco",
         "PPumpkin",
-        "PTurkey",
-        "PWholeHam"
+        "PTaco",
+        "PCupcake"
     ],
     "damageItems": [
         "PCookingKnife",
-        "PFryingPan"
+        "PFryingPan",
+        "PMeatTenderizer"
     ],
     "healItems": [
         "PApple"
     ],
     "defenceItems": [
-        "PBurger"
+        "PBurger",
+        "PSub",
+        "PPanLid"
     ],
     "enemyItems": [
-        "PTurkey"
+        "PPotstew"
     ]
 }

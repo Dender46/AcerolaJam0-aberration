@@ -94,19 +94,19 @@ public class GameManager : MonoBehaviour
 
     private void OnEnemyWon(object sender, EventArgs args)
     {
-        _playerCoins = 0;
+        _playerCoins /= 2;
         _gameState = GameState.WaitingForConveyor;
         //_combatLostScreen.Show("Enemy Won");
         var screenTitle = "You were Defeated!";
         var screenDescription = "";
         if (PlayerInventory.instance.CombatCardsCount <= 0)
         {
-            screenDescription = "You had no equipment!\n...and, monster took all your money";
+            screenDescription = "You had no equipment!\n...and, monster took some of your money";
         }
         if (LevelManager.instance.levelIsTutorial)
         {
             screenTitle = "Oops!";
-            screenDescription = "Don't worry, this is not your fault\nYou had no equipment!\n...also, monster took all your money";
+            screenDescription = "Don't worry, this is not your fault\nYou had no equipment!\n...also, monster took some of your money";
         }
         _combatLostScreen.Show(screenTitle, screenDescription);
 

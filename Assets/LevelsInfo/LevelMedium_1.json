@@ -6,16 +6,11 @@
         {"3": "Defence"},
         {"4": "Enemy"}
     ],
-    
+
     "spoilRangeTarget": [35,40,55,60],
 
-    "objectives": [1, 2],
-    "items": [
-        0,0,0,0,
-        2,2,0,1,
-        0,0,1,0,
-        0,1,0,4
-    ],
+    "objectives": [2],
+    "items": [0,0,0,0,2,0,0,1,4,1,0,3,0,1,0,4],
     "spoiledChance": 0.5,
     "regularItems": [
         "PBrocolli",
@@ -28,13 +23,15 @@
         "PWholeHam"
     ],
     "damageItems": [
-        "PCookingKnife"
+        "PCookingKnife",
+        "PFryingPan"
     ],
     "healItems": [
         "PApple"
     ],
     "defenceItems": [
-        "PBurger"
+        "PBurger",
+        "PSub"
     ],
     "enemyItems": [
         "PTurkey"
