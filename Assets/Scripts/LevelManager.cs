@@ -162,6 +162,7 @@ public class LevelManager : MonoBehaviour
         _taskDescription.text = allObjectivesText;
     }
 
+    // TODO: THERE IS A BUG IM TOO LAZY TO FIX NOW AND THE GAME WAS PUBLISHED TO GAME JAM
     public bool ItemMeetsObjectives(bool playerApproves, ConveyorItem item)
     {
         var shouldBees = new List<bool>();
